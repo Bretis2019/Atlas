@@ -1,7 +1,7 @@
 export default function Dashboard(props){
     const {sp} = props
     return(
-        <div className={"w-[82svw] h-[93svh] grid grid-cols-3 grid-rows-8 divide-x-2 divide-y-2 divide-black"}>
+        <div className={"w-[82svw] max-h-[90svh] md:h-[93svh] grid grid-cols-3 grid-rows-8 divide-x-2 divide-y-2 divide-black"}>
             <div className={"border-t-2 border-black border-l-2 row-span-3"}>
                 <div className={"flex flex-col"}>
                     <div className={"py-7 px-4 text-5xl border-b-2 border-black"}>My Dashboard</div>
