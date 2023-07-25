@@ -58,22 +58,30 @@ export default function Markets(props){
             <div className={" row-span-5"}>
                 <div className="flex flex-col">
                     <div className={"py-6 px-4 text-4xl border-b-2 border-black dark:border-white"}>Learn</div>
-                    <div className={"cursor-pointer py-3 px-4 text-2xl border-b-2 border-black hover:bg-gray-200 dark:border-white dark:hover:bg-gray-900"}>
-                        <div>Spot</div>
-                        <div className={"text-sm"}>Direct buying and selling of stocks</div>
-                    </div>
-                    <div className={"cursor-pointer py-3 px-4 text-2xl border-b-2 border-black hover:bg-gray-200 dark:border-white dark:hover:bg-gray-900"}>
-                        <div>Cross Margin</div>
-                        <div className={"text-sm"}>Amplify profits with leverage in stocks</div>
-                    </div>
-                    <div className={"cursor-pointer py-3 px-4 text-2xl border-b-2 border-black hover:bg-gray-200 dark:border-white dark:hover:bg-gray-900"}>
-                        <div>Isolated Margin</div>
-                        <div className={"text-sm"}>Safer leverage usage in stock trading</div>
-                    </div>
-                    <div className={"cursor-pointer py-3 px-4 text-2xl border-b-2 border-black hover:bg-gray-200 dark:border-white dark:hover:bg-gray-900"}>
-                        <div>Grid Automated</div>
-                        <div className={"text-sm"}>Automated stock trading using programmed algorithms</div>
-                    </div>
+                    <a href={"https://www.investopedia.com/terms/s/spottrade.asp"}>
+                        <div className={"cursor-pointer py-3 px-4 text-2xl border-b-2 border-black hover:bg-gray-200 dark:border-white dark:hover:bg-gray-900"}>
+                            <div>Spot</div>
+                            <div className={"text-sm"}>Direct buying and selling of stocks</div>
+                        </div>
+                    </a>
+                    <a href={"https://www.investopedia.com/terms/c/crossmargining.asp#:~:text=Key%20Takeaways,across%20all%20of%20their%20accounts."}>
+                        <div className={"cursor-pointer py-3 px-4 text-2xl border-b-2 border-black hover:bg-gray-200 dark:border-white dark:hover:bg-gray-900"}>
+                            <div>Cross Margin</div>
+                            <div className={"text-sm"}>Amplify profits with leverage in stocks</div>
+                        </div>
+                    </a>
+                    <a href={"https://www.investopedia.com/terms/m/margin.asp"}>
+                        <div className={"cursor-pointer py-3 px-4 text-2xl border-b-2 border-black hover:bg-gray-200 dark:border-white dark:hover:bg-gray-900"}>
+                            <div>Isolated Margin</div>
+                            <div className={"text-sm"}>Safer leverage usage in stock trading</div>
+                        </div>
+                    </a>
+                    <a href={"https://www.investopedia.com/terms/g/grid-trading.asp#:~:text=Grid%20trading%20involves%20placing%20buy,orders%20below%20the%20set%20price."}>
+                        <div className={"cursor-pointer py-3 px-4 text-2xl border-b-2 border-black hover:bg-gray-200 dark:border-white dark:hover:bg-gray-900"}>
+                            <div>Grid Automated</div>
+                            <div className={"text-sm"}>Automated stock trading using programmed algorithms</div>
+                        </div>
+                    </a>
                 </div>
             </div>
         </div>
