@@ -6,6 +6,7 @@ import Trade from "./components/Trade/Trade";
 import {useEffect, useState} from "react";
 import Papa from "papaparse";
 import Dashboard from "./components/Dashboard/Dashboard";
+import Stock from "./components/Stock";
 function App() {
 
     const alpha = require('alphavantage')({ key: 'WHISX77VWA1Z3PBH' });
@@ -16,6 +17,10 @@ function App() {
     const [sp, setSp] = useState([]);
     const [dji, setDji] = useState([]);
     const [calendar, setCalendar] = useState([]);
+    const[stock, setStock] = useState("");
+
+
+
 
     useEffect(() => {
         function dataTreatMost(data){
@@ -153,6 +158,7 @@ function App() {
 
     const handlePageChange = (newPage) => {
         setPage(newPage);
+        setStock("");
     };
 
     const [show, setShow] = useState(false);
@@ -161,13 +167,18 @@ function App() {
         setShow(prevState => !prevState);
     };
 
+    const handleStock = (ticker) => {
+        setStock(ticker);
+        setPage("");
+    }
+
   return (
-    <div className={"md:overflow-hidden bg-white dark:bg-black"}>
-        <Navbar onShow={handleShow} />
+    <div className={"md:overflow-hidden overflow-x-hidden bg-white dark:bg-black w-[100svw] h-[100svh] no-scrollbar"}>
+        <Navbar onShow={handleShow} setStock={handleStock}/>
       <div className={"flex"}>
           <Sidebar onPageChange={handlePageChange} page={page} show={show}/>
-          {page === "Markets" ? <Markets gainers={gainers} losers={losers} traded={traded} sp={sp} dji={dji} calendar={calendar}/> :
-              page === "Trade" ? <Trade popularData={popularData} favoritesData={favoritesData} news={news}/>: <Dashboard sp={sp}/>}
+          {stock !== "" ? <Stock ticker={stock} setStock={handleStock}/> : page === "Markets" ? <Markets gainers={gainers} losers={losers} traded={traded} sp={sp} dji={dji} calendar={calendar} setStock={handleStock}/> :
+              page === "Trade" ? <Trade popularData={popularData} favoritesData={favoritesData} news={news} setStock={handleStock}/>: <Dashboard sp={sp}/>}
       </div>
     </div>
   );

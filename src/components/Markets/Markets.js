@@ -32,28 +32,28 @@ export default function Markets(props){
                     <div className={"text-2xl"}>Top Gainers</div>
                     <div className={"cursor-pointer rounded-full border-2 dark:border-white dark:hover:bg-gray-900 border-black px-2 py-2 hover:bg-gray-200"}>See all</div>
                 </div>
-                <Gainers array={gainers}/>
+                <Gainers array={gainers} setStock={props.setStock}/>
             </div>
             <div className={"row-span-3 p-2"}>
                 <div className={"flex justify-between"}>
                     <div className={"text-2xl"}>Top Losers</div>
                     <div className={"cursor-pointer rounded-full border-2 dark:border-white dark:hover:bg-gray-900 border-black px-2 py-2 hover:bg-gray-200"}>See all</div>
                 </div>
-                <Losers array={losers}/>
+                <Losers array={losers} setStock={props.setStock}/>
             </div>
             <div className={" row-span-5 p-2"}>
                 <div className={"flex justify-between mb-2"}>
                     <div className={"text-4xl"}>Earnings</div>
                     <div className={"cursor-pointer rounded-full border-2 dark:border-white dark:hover:bg-gray-900 border-black px-2 py-2 hover:bg-gray-200"}>See all</div>
                 </div>
-                <Calendar calendar={calendar}/>
+                <Calendar calendar={calendar} setStock={props.setStock}/>
             </div>
             <div className={" row-span-5 p-2"}>
                 <div className={"flex justify-between mb-2"}>
                     <div className={"text-4xl"}>Most traded</div>
                     <div className={"cursor-pointer rounded-full border-2 dark:border-white dark:hover:bg-gray-900 border-black px-2 py-2 hover:bg-gray-200"}>See all</div>
                 </div>
-                <Traded array={traded}/>
+                <Traded array={traded} setStock={props.setStock}/>
             </div>
             <div className={" row-span-5"}>
                 <div className="flex flex-col">

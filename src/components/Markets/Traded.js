@@ -6,7 +6,7 @@ export default function Traded(props){
         const formattedPrice = parseFloat(item.price).toFixed(2);
         const formattedPercentage = parseFloat(item.change_percentage).toFixed(2);
         return(
-            <div className={"flex items-center justify-between space-y-6"}>
+            <div onClick={() =>  props.setStock(item.ticker)} className={"flex items-center justify-between space-y-6 cursor-pointer"}>
                 <div className={"text-xl font-bold"}>{item.ticker}</div>
                 <div><StockChart name={item.ticker} api={"vFnrj8Z8jIg01J_5GYdCxRJ0M6jfAgWE"}/></div>
                 <div className={"flex flex-col text-end"}>

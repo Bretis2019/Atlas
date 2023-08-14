@@ -6,7 +6,7 @@ export default function News(props){
         return (
             <a href={item.url} className={"my-8"}>
                 <div className={"flex gap-x-4"} >
-                    <img src={url} alt={""} className={"w-[80px] h-[80px] object-cover rounded-xl border-2 border-black dark:border-white"}/>
+                    <img src={url} alt={""} className={"w-[80px] h-[80px] object-cover rounded-xl border-2 border-black dark:border-white"} loading="lazy"/>
                     <div className={"cutoff-text"}>{item.title}</div>
                 </div>
             </a>

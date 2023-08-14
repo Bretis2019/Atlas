@@ -7,7 +7,7 @@ export default function Calendar(props){
         const textColor = item.estimate > 0 ? 'text-green-700' : 'text-red-700';
 
         return (
-            <div className={"flex justify-between my-4"}>
+            <div onClick={() => props.setStock(item.symbol)} className={"flex justify-between my-4 cursor-pointer"}>
                 <div className="text-xl">{item.symbol}</div>
 
                 {/* Conditional rendering for estimate */}

@@ -10,7 +10,7 @@ export default function Favourites(props) {
 
     const Elements = data.map((item) => {
         return (
-            <div className={"flex justify-between items-center"} key={item.symbol}>
+            <div onClick={() =>  props.setStock(item.symbol)} className={"flex justify-between items-center cursor-pointer"} key={item.symbol}>
                 <div>
                     <h1 className={"text-3xl"}>{item.symbol}</h1>
                     <h1 className={"text-gray-500"}>{item.name}</h1>
