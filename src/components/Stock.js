@@ -61,13 +61,16 @@ export default function Stock(props){
     const [recommendations, setRecommendations] = useState([]);
     const [span, setSpan] = useState("day");
     const [cards, setCards] = useState([]);
+    const [isLoading, setIsLoading] = useState(true);
 
 
     useEffect(() => {
+        setIsLoading(true);
         fetch(`https://atlasapi-4oe2.onrender.com/description?ticker=${ticker}`)
             .then(response => response.json())
             .then(data => {
                 setDescription(data);
+                setIsLoading(false);
             })
             .catch(error => {
                 console.error('Error:', error);
@@ -89,10 +92,18 @@ export default function Stock(props){
         setCards(cardElements);
     }, [recommendations]);
 
+    if(isLoading){
+        return (
+            <div className={"dark:bg-black dark:divide-white dark:text-white w-[100svw] md:w-[82svw] h-[93svh] border-t-2 border-l-2 flex justify-center items-center"}>
+                <h1 className={"text-3xl md:text-5xl text-center"}>Loading...</h1>
+            </div>
+        )
+    }
+
     if(!description || !description.name || description.name.length === 0){
         return(
-            <div className={"dark:bg-black dark:divide-white dark:text-white w-[100svw] md:w-[82svw] md:h-[93svh] border-t-2 border-l-2 flex justify-center items-center"}>
-                <h1 className={"text-5xl"}>Sorry we don't have that ticker yet</h1>
+            <div className={"dark:bg-black dark:divide-white dark:text-white w-[100svw] md:w-[82svw] h-[93svh] border-t-2 border-l-2 flex justify-center items-center"}>
+                <h1 className={"text-3xl md:text-5xl text-center"}>Sorry we don't have that ticker yet</h1>
             </div>
         )
     }
@@ -102,9 +113,11 @@ export default function Stock(props){
             <div className={"border-t-2 dark:border-white border-black border-l-2 row-span-3"}>
                 <div className={"py-7 px-4 flex items-center space-x-4"}>
                     <img className={"h-[50px] w-[50px] object-contain rounded-lg"} src={getFirstWord(description.name) === "Meta" ? "https://logo.clearbit.com/https://www.meta.com" : description.logo} alt={description.name + "logo"} loading="lazy"/>
-                    <div className={"text-4xl"}>{getFirstWord(description.name)}</div>
-                    <div className={"text-2xl"}>${description.price.toFixed(2)}</div>
-                    <div className={`text-xl text-${description.change < 0 ? "red-700" : "green-700"}`}>{roundToFirstNonZeroDecimal(description.change)}%</div>
+                    <div className={"text-3xl md:text-4xl"}>{getFirstWord(description.name)}</div>
+                    <div className={"flex max-md:flex-col"}>
+                        <div className={"text-2xl"}>${description.price.toFixed(2)}</div>
+                        <div className={`text-xl text-${description.change < 0 ? "red-700" : "green-700"}`}>{roundToFirstNonZeroDecimal(description.change)}%</div>
+                    </div>
                 </div>
                 <div className={"py-2 space-y-4 px-2  border-t-2 dark:border-white border-black space-x-4 flex flex-col overflow-hidden max-h-[330px] md:max-h-[235px]"}>
                     <div className="text-4xl px-2">Description</div>
@@ -114,13 +127,13 @@ export default function Stock(props){
             <div className={"border-t-2 dark:border-white border-black border-l-2 row-span-4"}>
                 <div className={"flex flex-col px-4 py-2"}>
                     <CandleStock ticker={ticker} span={span}/>
-                    <div className="flex pt-8 space-x-4 justify-center items-center overflow-x-scroll no-scrollbar">
-                        <button name="hour" onClick={(event) => setSpan(event.target.name)} className={`border-2 border-white px-4 py-2 rounded-full hover:bg-gray-800 ${span === "hour" ? 'bg-green-300 dark:bg-green-900': ''}`}>Hour</button>
-                        <button name="day" onClick={(event) => setSpan(event.target.name)} className={`border-2 border-white px-4 py-2 rounded-full hover:bg-gray-800 ${span === "day" ? 'bg-green-300 dark:bg-green-900': ''}`}>Day</button>
-                        <button name="week" onClick={(event) => setSpan(event.target.name)} className={`border-2 border-white px-4 py-2 rounded-full hover:bg-gray-800 ${span === "week" ? 'bg-green-300 dark:bg-green-900': ''}`}>Week</button>
-                        <button name="month" onClick={(event) => setSpan(event.target.name)} className={`border-2 border-white px-4 py-2 rounded-full hover:bg-gray-800 ${span === "month" ? 'bg-green-300 dark:bg-green-900': ''}`}>Month</button>
-                        <button name="year" onClick={(event) => setSpan(event.target.name)} className={`border-2 border-white px-4 py-2 rounded-full hover:bg-gray-800 ${span === "year" ? 'bg-green-300 dark:bg-green-900': ''}`}>Year</button>
-                        <button name="all" onClick={(event) => setSpan(event.target.name)} className={`border-2 border-white px-4 py-2 rounded-full hover:bg-gray-800 ${span === "all" ? 'bg-green-300 dark:bg-green-900': ''}`}>All</button>
+                    <div className="flex pt-8 space-x-2 md:space-x-4 items-center overflow-x-scroll no-scrollbar">
+                        <button name="hour" onClick={(event) => setSpan(event.target.name)} className={`border-2 border-black dark:border-white px-4 py-2 rounded-full hover:bg-gray-200 dark:hover:bg-gray-800 ${span === "hour" ? 'bg-green-300 dark:bg-green-900': ''}`}>Hour</button>
+                        <button name="day" onClick={(event) => setSpan(event.target.name)} className={`border-2 border-black dark:border-white px-4 py-2 rounded-full hover:bg-gray-200 dark:hover:bg-gray-800 ${span === "day" ? 'bg-green-300 dark:bg-green-900': ''}`}>Day</button>
+                        <button name="week" onClick={(event) => setSpan(event.target.name)} className={`border-2 border-black dark:border-white px-4 py-2 rounded-full hover:bg-gray-200 dark:hover:bg-gray-800 ${span === "week" ? 'bg-green-300 dark:bg-green-900': ''}`}>Week</button>
+                        <button name="month" onClick={(event) => setSpan(event.target.name)} className={`border-2 border-black dark:border-white px-4 py-2 rounded-full hover:bg-gray-200 dark:hover:bg-gray-800 ${span === "month" ? 'bg-green-300 dark:bg-green-900': ''}`}>Month</button>
+                        <button name="year" onClick={(event) => setSpan(event.target.name)} className={`border-2 border-black dark:border-white px-4 py-2 rounded-full hover:bg-gray-200 dark:hover:bg-gray-800 ${span === "year" ? 'bg-green-300 dark:bg-green-900': ''}`}>Year</button>
+                        <button name="all" onClick={(event) => setSpan(event.target.name)} className={`border-2 border-black dark:border-white px-4 py-2 rounded-full hover:bg-gray-200 dark:hover:bg-gray-800 ${span === "all" ? 'bg-green-300 dark:bg-green-900': ''}`}>All</button>
                     </div>
                 </div>
             </div>

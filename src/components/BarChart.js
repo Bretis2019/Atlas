@@ -1,5 +1,6 @@
 import Chart from "react-apexcharts";
-
+const isDarkMode = () =>
+    window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
 export default function BarChart(props){
     const {data} = props;
 
@@ -7,7 +8,7 @@ export default function BarChart(props){
         options: {
             chart: {
                 id: 'bar-chart',
-                theme: 'dark',
+                theme: isDarkMode() ?  'dark' : 'light',
                 toolbar: {
                     show: false
                 },
@@ -21,7 +22,7 @@ export default function BarChart(props){
                 categories: data.map(item => item.date),
                 labels: {
                     style: {
-                        colors: '#ffffff',
+                        colors: isDarkMode() ? '#ffffff': '#000000',
                         fontFamily: 'Space Mono'
                     }
                 }
@@ -29,19 +30,19 @@ export default function BarChart(props){
             yaxis: {
                 labels: {
                     style: {
-                        colors: '#ffffff',
+                        colors: isDarkMode() ? '#ffffff': '#000000',
                         fontFamily: 'Space Mono'
                     }
                 }
             },
             legend: {
                 labels: {
-                    colors: '#ffffff',
+                    colors: isDarkMode() ? '#ffffff': '#000000',
                     fontFamily: 'Space Mono',
                 }
             },
             tooltip: {
-                theme: 'dark',
+                theme: isDarkMode() ?  'dark' : 'light'
             },
         },
         series: [

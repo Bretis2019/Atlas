@@ -35,9 +35,9 @@ export default function Navbar(props){
     useEffect(()=>{
         const Elements = suggestions.map(item =>{
             return (
-                <div onClick={() =>  handleClick(item.ticker)} className={"flex justify-between py-2 px-4 dark:hover:bg-gray-800 cursor-pointer"}>
-                    <div>{item.long}</div>
-                    <div>{item.ticker}</div>
+                <div onClick={() =>  handleClick(item.ticker)} className={"flex justify-between py-2 px-4 hover:bg-gray-200 dark:hover:bg-gray-800 cursor-pointer"}>
+                    <div className={"text-xl md:text-2xl"}>{item.long}</div>
+                    <div className={"text-xl md:text-2xl"}>{item.ticker}</div>
                 </div>
             )
         });
@@ -57,7 +57,7 @@ export default function Navbar(props){
                 </div>
             </div>
             {suggestions[0] &&
-                <div className={"w-[81.9svw] top-[7svh] left-[18.1svw] absolute flex flex-col h-fit divide-y-2 z-50 text-4xl text-white bg-black border-2 border-white"}>
+                <div className={"md:w-[81.9svw] top-[7svh] md:left-[18.1svw] absolute flex flex-col h-fit divide-y-2 divide-black dark:divide-white z-50 text-4xl text-black dark:text-white bg-white dark:bg-black border-2 border-black dark:border-white"}>
                     {cards}
                 </div>
             }
