@@ -21,7 +21,7 @@ function roundToFirstNonZeroDecimal(number) {
 export function getFirstWord(str) {
     str = str.trim();
 
-    const firstSpaceIndex = str.indexOf(' ');
+    const firstSpaceIndex = str.search(/[\s,\.]/);
 
     if (firstSpaceIndex === -1) {
         return cleanString(str);
@@ -114,20 +114,20 @@ export default function Stock(props){
                 <div className={"py-7 px-4 flex items-center space-x-4"}>
                     <img className={"h-[50px] w-[50px] object-contain rounded-lg"} src={getFirstWord(description.name) === "Meta" ? "https://logo.clearbit.com/https://www.meta.com" : description.logo} alt={description.name + "logo"} loading="lazy"/>
                     <div className={"text-3xl md:text-4xl"}>{getFirstWord(description.name)}</div>
-                    <div className={"flex max-md:flex-col"}>
+                    <div className={"flex max-md:flex-col space-x-4 max-md:space-y-4 items-center"}>
                         <div className={"text-2xl"}>${description.price.toFixed(2)}</div>
-                        <div className={`text-xl text-${description.change < 0 ? "red-700" : "green-700"}`}>{roundToFirstNonZeroDecimal(description.change)}%</div>
+                        <div className={`text-2xl text-${description.change < 0 ? "red-700" : "green-700"}`}>{roundToFirstNonZeroDecimal(description.change)}%</div>
                     </div>
                 </div>
                 <div className={"py-2 space-y-4 px-2  border-t-2 dark:border-white border-black space-x-4 flex flex-col overflow-hidden max-h-[330px] md:max-h-[235px]"}>
                     <div className="text-4xl px-2">Description</div>
-                    <div>{description.description}</div>
+                    <div onClick={() => {window.location.href = description.logo.replace("https://logo.clearbit.com/", "")}}>{description.description}</div>
                 </div>
             </div>
             <div className={"border-t-2 dark:border-white border-black border-l-2 row-span-4"}>
                 <div className={"flex flex-col px-4 py-2"}>
                     <CandleStock ticker={ticker} span={span}/>
-                    <div className="flex pt-8 space-x-2 md:space-x-4 items-center overflow-x-scroll no-scrollbar">
+                    <div className="flex pt-8 space-x-2 md:space-x-4 md:justify-center items-center overflow-x-scroll no-scrollbar">
                         <button name="hour" onClick={(event) => setSpan(event.target.name)} className={`border-2 border-black dark:border-white px-4 py-2 rounded-full hover:bg-gray-200 dark:hover:bg-gray-800 ${span === "hour" ? 'bg-green-300 dark:bg-green-900': ''}`}>Hour</button>
                         <button name="day" onClick={(event) => setSpan(event.target.name)} className={`border-2 border-black dark:border-white px-4 py-2 rounded-full hover:bg-gray-200 dark:hover:bg-gray-800 ${span === "day" ? 'bg-green-300 dark:bg-green-900': ''}`}>Day</button>
                         <button name="week" onClick={(event) => setSpan(event.target.name)} className={`border-2 border-black dark:border-white px-4 py-2 rounded-full hover:bg-gray-200 dark:hover:bg-gray-800 ${span === "week" ? 'bg-green-300 dark:bg-green-900': ''}`}>Week</button>
