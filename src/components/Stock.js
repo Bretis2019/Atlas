@@ -94,7 +94,7 @@ export default function Stock(props){
 
     if(isLoading){
         return (
-            <div className={"dark:bg-black dark:divide-white dark:text-white w-[100svw] md:w-[82svw] h-[93svh] border-t-2 border-l-2 flex justify-center items-center"}>
+            <div className={"dark:bg-black dark:divide-white dark:text-white w-[100svw] h-[93vh] md:w-[82svw] md:h-[93svh] border-t-2 border-l-2 flex justify-center items-center"}>
                 <h1 className={"text-3xl md:text-5xl text-center"}>Loading...</h1>
             </div>
         )
@@ -111,9 +111,11 @@ export default function Stock(props){
     return(
         <div className={"dark:bg-black dark:divide-white dark:text-white w-[100svw] md:w-[82svw] md:h-[93svh] grid grid-cols-1 md:grid-cols-2 grid-rows-6 divide-x-2 divide-y-2 divide-black border-r-2 md:border-r-0"}>
             <div className={"border-t-2 dark:border-white border-black border-l-2 row-span-3"}>
-                <div className={"py-7 px-4 flex items-center space-x-4"}>
-                    <img className={"h-[50px] w-[50px] object-contain rounded-lg"} src={getFirstWord(description.name) === "Meta" ? "https://logo.clearbit.com/https://www.meta.com" : description.logo} alt={description.name + "logo"} loading="lazy"/>
-                    <div className={"text-3xl md:text-4xl"}>{getFirstWord(description.name)}</div>
+                <div className={"py-7 px-4 flex justify-between items-center space-x-4"}>
+                    <div className="flex items-center">
+                        <img className={"h-[50px] w-[50px] object-contain rounded-lg"} src={getFirstWord(description.name) === "Meta" ? "https://logo.clearbit.com/https://www.meta.com" : description.logo} alt={description.name + "logo"} loading="lazy"/>
+                        <div className={"px-2 text-3xl md:text-4xl"}>{getFirstWord(description.name)}</div>
+                    </div>
                     <div className={"flex max-md:flex-col space-x-4 max-md:space-y-4 items-center"}>
                         <div className={"text-2xl"}>${description.price.toFixed(2)}</div>
                         <div className={`text-2xl text-${description.change < 0 ? "red-700" : "green-700"}`}>{roundToFirstNonZeroDecimal(description.change)}%</div>
