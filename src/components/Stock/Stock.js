@@ -102,7 +102,7 @@ export default function Stock(props){
 
     if(!description || !description.name || description.name.length === 0){
         return(
-            <div className={"dark:bg-black dark:divide-white dark:text-white w-[100svw] md:w-[82svw] h-[93svh] border-t-2 border-l-2 flex justify-center items-center"}>
+            <div className={"dark:bg-black dark:divide-white dark:text-white w-[100svw] md:w-[82svw] h-[93vh] border-t-2 border-l-2 flex justify-center items-center"}>
                 <h1 className={"text-3xl md:text-5xl text-center"}>Sorry we don't have that ticker yet</h1>
             </div>
         )

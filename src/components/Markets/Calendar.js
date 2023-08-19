@@ -29,7 +29,7 @@ export default function Calendar(props){
     });
 
     return(
-        <div className={"h-[340px] overflow-y-scroll flex flex-col pr-2"}>
+            <div className={"h-[340px] overflow-y-scroll flex flex-col pr-2"}>
             {Elements}
         </div>
     )

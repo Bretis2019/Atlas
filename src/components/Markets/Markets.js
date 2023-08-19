@@ -1,10 +1,32 @@
 import Gainers from "./Gainers";
 import Losers from "./Losers";
 import Traded from "./Traded";
-import Calendar from "./Calendar";
+import {useEffect, useState} from "react";
+import Insight from "./Insight";
 
 export default function Markets(props){
-    const {gainers, losers, traded, sp, dji, calendar} = props;
+    const [sp, setSp] = useState([0,0]);
+    const [dji, setDji] = useState([0,0]);
+    useEffect(()=>{
+        fetch(`https://atlasapi-4oe2.onrender.com/quote?ticker=spy`)
+            .then(response => response.json())
+            .then(data => {
+                const formattedData = [data.change, data.price];
+                setSp(formattedData);
+            })
+            .catch(error => {
+                console.error('Error:', error);
+            });
+        fetch(`https://atlasapi-4oe2.onrender.com/quote?ticker=dia`)
+            .then(response => response.json())
+            .then(data => {
+                const formattedData = [data.change, data.price];
+                setDji(formattedData);
+            })
+            .catch(error => {
+                console.error('Error:', error);
+            });
+    },[]);
 
     return(
         <div className={"dark:bg-black dark:divide-white dark:text-white w-[100svw] md:w-[82svw] md:h-[93svh] grid grid-cols-1 md:grid-cols-3 grid-rows-8 divide-x-2 divide-y-2 divide-black border-r-2 md:border-r-0"}>
@@ -14,14 +36,14 @@ export default function Markets(props){
                     <div className={"p-2 border-b-2 border-black dark:border-white"}>
                         <div className={"flex items-center space-x-2"}>
                             <div className={"text-2xl"}>S&P 500</div>
-                            <div className={`text-${sp[0] < 0 ? 'red-700' : 'green-700'}`}>{sp[0]}%</div>
+                            <div className={`text-${sp[0] < 0 ? 'red-700' : 'green-700'}`}>{sp[0].toFixed(2)}%</div>
                         </div>
                         <div className={"text-4xl"}>${Number(sp[1]).toFixed(2)}</div>
                     </div>
                     <div className={"p-2"}>
                         <div className={"flex items-center space-x-2"}>
                             <div className={"text-2xl"}>Dow Jones</div>
-                            <div className={`text-${dji[0] < 0 ? 'red-700' : 'green-700'}`}>{dji[0]}%</div>
+                            <div className={`text-${dji[0] < 0 ? 'red-700' : 'green-700'}`}>{dji[0].toFixed(2)}%</div>
                         </div>
                         <div className={"text-4xl"}>${Number(dji[1]).toFixed(2)}</div>
                     </div>
@@ -32,28 +54,27 @@ export default function Markets(props){
                     <div className={"text-2xl"}>Top Gainers</div>
                     <div className={"cursor-pointer rounded-full border-2 dark:border-white dark:hover:bg-gray-900 border-black px-2 py-2 hover:bg-gray-200"}>See all</div>
                 </div>
-                <Gainers array={gainers} setStock={props.setStock}/>
+                <Gainers setStock={props.setStock}/>
             </div>
             <div className={"row-span-3 p-2"}>
                 <div className={"flex justify-between"}>
                     <div className={"text-2xl"}>Top Losers</div>
                     <div className={"cursor-pointer rounded-full border-2 dark:border-white dark:hover:bg-gray-900 border-black px-2 py-2 hover:bg-gray-200"}>See all</div>
                 </div>
-                <Losers array={losers} setStock={props.setStock}/>
+                <Losers setStock={props.setStock}/>
             </div>
             <div className={" row-span-5 p-2"}>
                 <div className={"flex justify-between mb-2"}>
-                    <div className={"text-4xl"}>Earnings</div>
-                    <div className={"cursor-pointer rounded-full border-2 dark:border-white dark:hover:bg-gray-900 border-black px-2 py-2 hover:bg-gray-200"}>See all</div>
+                    <div className={"text-4xl"}>Insight</div>
                 </div>
-                <Calendar calendar={calendar} setStock={props.setStock}/>
+                <Insight setStock={props.setStock}/>
             </div>
             <div className={" row-span-5 p-2"}>
                 <div className={"flex justify-between mb-2"}>
                     <div className={"text-4xl"}>Most traded</div>
                     <div className={"cursor-pointer rounded-full border-2 dark:border-white dark:hover:bg-gray-900 border-black px-2 py-2 hover:bg-gray-200"}>See all</div>
                 </div>
-                <Traded array={traded} setStock={props.setStock}/>
+                <Traded setStock={props.setStock}/>
             </div>
             <div className={" row-span-5"}>
                 <div className="flex flex-col">

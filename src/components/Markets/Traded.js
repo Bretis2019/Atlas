@@ -1,14 +1,27 @@
 import StockChart from "./StockChart";
+import {useEffect, useState} from "react";
 
 export default function Traded(props){
-    const array = props.array;
+
+    const [array, setArray] = useState([]);
+    useEffect(()=>{
+        fetch(`https://atlasapi-4oe2.onrender.com/active`)
+            .then(response => response.json())
+            .then(data => {
+                setArray(data);
+            })
+            .catch(error => {
+                console.error('Error:', error);
+            });
+    },[]);
+
     const Elements =  array.slice(0,4).map(item => {
         const formattedPrice = parseFloat(item.price).toFixed(2);
-        const formattedPercentage = parseFloat(item.change_percentage).toFixed(2);
+        const formattedPercentage = parseFloat(item.change).toFixed(2);
         return(
-            <div onClick={() =>  props.setStock(item.ticker)} className={"flex items-center justify-between space-y-6 cursor-pointer"}>
-                <div className={"text-xl font-bold"}>{item.ticker}</div>
-                <div><StockChart name={item.ticker} api={"vFnrj8Z8jIg01J_5GYdCxRJ0M6jfAgWE"}/></div>
+            <div onClick={() =>  props.setStock(item.symbol)} className={"flex items-center justify-between space-y-4 cursor-pointer"}>
+                <div className={"text-xl font-bold"}>{item.symbol}</div>
+                <div><StockChart name={item.symbol}/></div>
                 <div className={"flex flex-col text-end"}>
                     <div className={`text-${parseInt(formattedPercentage) >= 0 ? 'green-700' : 'red-700'} text-xl`}>{formattedPercentage}%</div>
                     <div>${formattedPrice}</div>

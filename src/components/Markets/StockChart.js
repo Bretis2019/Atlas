@@ -3,9 +3,7 @@ import { useEffect, useState } from "react";
 export default function StockChart(props) {
     const [series, setSeries] = useState([]);
     const [color, setColor] = useState('rgb(21, 128, 61)')
-
-    const apiKey = props.api;
-    const ticker = props.name.replace(/[^a-zA-Z]/g, "");
+    const ticker = props.name;
     const today = new Date();
     const thirtyDaysAgo = new Date();
     thirtyDaysAgo.setDate(today.getDate() - 30);
@@ -14,20 +12,21 @@ export default function StockChart(props) {
     const toDate = today.toISOString().split('T')[0];
 
     useEffect(() => {
-        function treatData(data){
-            const historicalPrices = data.results.map(result => result.c);
-            if(historicalPrices[0] - historicalPrices[historicalPrices.length - 1] >= 0){setColor('rgb(185, 28, 28)')}
-            setSeries(historicalPrices);
-        }
-            fetch(`https://api.polygon.io/v2/aggs/ticker/${ticker}/range/1/day/${fromDate}/${toDate}?apiKey=${apiKey}`)
-                .then(response => response.json())
-                .then(data => {
-                    treatData(data);
-                })
-                .catch(error => {
-                    console.log(`Error fetching data: ${props.name}`, error);
+        fetch(`https://atlasapi-4oe2.onrender.com/history?ticker=${ticker}&from=${fromDate}&to=${toDate}&interval=1d`)
+            .then(response => response.json())
+            .then(data => {
+                const elements = data.map(item => {
+                    return (
+                        item.close.toFixed(2)
+                    )
                 });
-    }, []);
+                if(elements[0] > elements[elements.length - 1]){setColor('rgb(185, 28, 28)')}
+                setSeries(elements);
+            })
+            .catch(error => {
+                console.error('Error:', error);
+            });
+    }, [ticker]);
 
     const options = {
         chart: {
