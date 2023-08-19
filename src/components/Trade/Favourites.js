@@ -20,7 +20,6 @@ export default function Favourites(props) {
             try {
                 const results = await Promise.all(fetchPromises);
                 setTickerData(results);
-                console.log(results);
             } catch (error) {
                 console.error("Error fetching quotes:", error);
             }

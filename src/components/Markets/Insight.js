@@ -29,7 +29,7 @@ export default function Insight(props){
 
     return(
         <div  className={"cursor-pointer h-[340px] overflow-y-scroll no-scrollbar"}>
-            <div className={"border-2 border-white"}>
+            <div className={"border-y-2 border-white"}>
                 <Searchbar size={"mini"} setStock={handleClick}/>
             </div>
             <div onClick={() =>  props.setStock(ticker)} className="flex flex-col justify-center text-center pt-8">

@@ -63,8 +63,8 @@ export default function Markets(props){
                 </div>
                 <Losers setStock={props.setStock}/>
             </div>
-            <div className={" row-span-5 p-2"}>
-                <div className={"flex justify-between mb-2"}>
+            <div className={"row-span-5"}>
+                <div className={"flex justify-between mb-2  p-2"}>
                     <div className={"text-4xl"}>Insight</div>
                 </div>
                 <Insight setStock={props.setStock}/>

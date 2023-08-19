@@ -1,8 +1,29 @@
 import Favourites from "./Favourites";
 import News from "./News";
+import {useEffect, useState} from "react";
 
 export default function Trade(props){
-    const {news} = props
+
+    const [news, setNews] = useState([]);
+
+    useEffect(()=>{
+        function treatNewsData(data){
+            const randomizedNews = [...data.feed];
+
+            for (let i = randomizedNews.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [randomizedNews[i], randomizedNews[j]] = [randomizedNews[j], randomizedNews[i]];
+            }
+
+            setNews(randomizedNews);
+        }
+        fetch("https://atlasapi-4oe2.onrender.com/news")
+            .then(response => response.json())
+            .then((data) => {
+                treatNewsData(data);
+            }).catch(error => console.log(error));
+    },[]);
+
     return(
         <div className={"dark:bg-black dark:divide-white dark:text-white w-[100svw] md:w-[82svw] md:h-[93svh] grid grid-cols-1 md:grid-cols-2 grid-rows-8 divide-x-2 divide-y-2 divide-black border-r-2 md:border-r-0"}>
             <div className={"border-t-2 dark:border-white border-black border-l-2 row-span-1"}>
