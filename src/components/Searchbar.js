@@ -7,18 +7,21 @@ export default function Searchbar(props){
     const [cards, setCards] = useState([]);
 
     useEffect(() =>{
-        if(query !== ""){
-            fetch(`https://atlasapi-4oe2.onrender.com/search?term=${query}`)
-                .then(response => response.json())
-                .then(data => {
-                    if (Array.isArray(data.suggestions)) {
-                        setSuggestions(data.suggestions);
-                    }
-                })
-                .catch(error => {
-                    console.error('Error:', error);
-                });
-        }
+        const getData = setTimeout(() => {
+            if(query !== ""){
+                fetch(`https://atlasapi-4oe2.onrender.com/search?term=${query}`)
+                    .then(response => response.json())
+                    .then(data => {
+                        if (Array.isArray(data.suggestions)) {
+                            setSuggestions(data.suggestions);
+                        }
+                    })
+                    .catch(error => {
+                        console.error('Error:', error);
+                    });
+            }
+        },500);
+        return () => clearTimeout(getData);
     },[query]);
 
     function handleClick(ticker){
