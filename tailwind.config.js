@@ -7,5 +7,13 @@ module.exports = {
     extend: {},
   },
   plugins: [],
+  purge: {
+    mode: 'all',
+    preserveHtmlElements: false,
+    content: [
+      './src/**/*.js',
+      './node_modules/flatpickr/**/*.js',
+    ],
+  },
 }
 
