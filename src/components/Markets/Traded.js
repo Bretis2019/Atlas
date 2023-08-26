@@ -4,11 +4,14 @@ import {useEffect, useState} from "react";
 export default function Traded(props){
 
     const [array, setArray] = useState([]);
+    const [loading, setLoading] = useState(false);
     useEffect(()=>{
+        setLoading(true);
         fetch(`https://atlasapi-4oe2.onrender.com/active`)
             .then(response => response.json())
             .then(data => {
                 setArray(data);
+                setLoading(false);
             })
             .catch(error => {
                 console.error('Error:', error);
@@ -29,6 +32,12 @@ export default function Traded(props){
             </div>
         )
     })
+
+    if(loading){
+        return (
+            <h1 className={"text-center text-4xl"}>Loading...</h1>
+        )
+    }
     return(
         <div className={"flex flex-col space-y-3"}>
             {Elements}

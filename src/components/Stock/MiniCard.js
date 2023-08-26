@@ -23,7 +23,7 @@ export default function MiniCard(props){
 
     if(isLoading){
         return (
-            <div onClick={() => props.setStock(ticker)} className={"cursor-pointer hover:bg-gray-200 dark:hover:bg-gray-800 flex flex-col items-center justify-center px-4 py-2 border-2 dark:border-white border-black rounded-lg min-w-[250px] min-h-[80px] max-w-fit"}>
+            <div onClick={() => props.setStock(ticker)} className={"cursor-pointer md:hover:bg-gray-200 dark:md:hover:bg-gray-800 flex flex-col items-center justify-center px-4 py-2 border-2 dark:border-white border-black rounded-lg min-w-[250px] min-h-[80px] max-w-fit"}>
                 <div>Loading</div>
             </div>
         )
@@ -34,7 +34,7 @@ export default function MiniCard(props){
     }
 
     return(
-        <div onClick={() => props.setStock(ticker)} className={"cursor-pointer hover:bg-gray-200 dark:hover:bg-gray-800 flex flex-col items-center justify-center px-4 py-2 border-2 dark:border-white border-black rounded-lg min-w-[250px] min-h-[80px] max-w-fit"}>
+        <div onClick={() => props.setStock(ticker)} className={"cursor-pointer md:hover:bg-gray-200 dark:md:hover:bg-gray-800 flex flex-col items-center justify-center px-4 py-2 border-2 dark:border-white border-black rounded-lg min-w-[250px] min-h-[80px] max-w-fit"}>
             <img className={"h-[50px] w-[50px] object-contain rounded-lg"}  src={getFirstWord(data.name) === "Meta" ? "https://logo.clearbit.com/https://www.meta.com" : data.logo} alt={data.name + "logo"} loading="lazy"/>
             <div>{getFirstWord(data.name)}</div>
         </div>

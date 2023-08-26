@@ -5,16 +5,19 @@ export default function Searchbar(props){
     const [query, setQuery] = useState("");
     const [suggestions, setSuggestions] = useState([]);
     const [cards, setCards] = useState([]);
+    const [loading, setLoading] = useState(false);
 
     useEffect(() =>{
         const getData = setTimeout(() => {
             if(query !== ""){
+                setLoading(true);
                 fetch(`https://atlasapi-4oe2.onrender.com/search?term=${query}`)
                     .then(response => response.json())
                     .then(data => {
                         if (Array.isArray(data.suggestions)) {
                             setSuggestions(data.suggestions);
                         }
+                        setLoading(false);
                     })
                     .catch(error => {
                         console.error('Error:', error);
@@ -30,9 +33,9 @@ export default function Searchbar(props){
     }
 
     useEffect(()=>{
-        const Elements = suggestions.map(item =>{
+        const Elements = suggestions.slice(0,3).map(item =>{
             return (
-                <div onClick={() =>  handleClick(item.ticker)} className={"flex justify-between py-2 px-4 hover:bg-gray-200 dark:hover:bg-gray-800 cursor-pointer"}>
+                <div onClick={() =>  handleClick(item.ticker)} className={"flex justify-between py-2 px-4 md:hover:bg-gray-200 dark:md:hover:bg-gray-800 cursor-pointer"}>
                     <div className={"text-xl md:text-2xl"}>{item.long}</div>
                     <div className={"text-xl md:text-2xl"}>{item.ticker}</div>
                 </div>
@@ -50,8 +53,8 @@ export default function Searchbar(props){
                     type={"text"}
                     placeholder={"Search for stocks"}
                 />
-                {query.length > 0 && (
-                    <div className={`absolute mt-1 w-full left-0 ${size === "mini" ? "md:w-[26svw]": "md:w-[75svw]"} z-50 text-4xl text-black dark:text-white bg-white dark:bg-black border-2 border-black dark:border-white`}>
+                {(query.length > 0 && suggestions.length > 0 && !loading) &&(
+                    <div className={`absolute mt-1 w-full left-0 ${size === "mini" ? "md:w-[26svw]": "md:w-[75svw]"} z-50 text-4xl text-black dark:text-white bg-white dark:bg-black border-2 border-black dark:border-white divide-y-2 divide-black dark:divide-white`}>
                         {cards}
                     </div>
                 )}

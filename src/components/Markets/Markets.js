@@ -52,14 +52,14 @@ export default function Markets(props){
             <div className={"row-span-3 p-2"}>
                 <div className={"flex justify-between"}>
                     <div className={"text-2xl"}>Top Gainers</div>
-                    <div className={"cursor-pointer rounded-full border-2 dark:border-white dark:hover:bg-gray-900 border-black px-2 py-2 hover:bg-gray-200"}>See all</div>
+                    <div className={"cursor-pointer rounded-full border-2 dark:border-white dark:md:hover:bg-gray-900 border-black px-2 py-2 md:hover:bg-gray-200"}>See all</div>
                 </div>
                 <Gainers setStock={props.setStock}/>
             </div>
             <div className={"row-span-3 p-2"}>
                 <div className={"flex justify-between"}>
                     <div className={"text-2xl"}>Top Losers</div>
-                    <div className={"cursor-pointer rounded-full border-2 dark:border-white dark:hover:bg-gray-900 border-black px-2 py-2 hover:bg-gray-200"}>See all</div>
+                    <div className={"cursor-pointer rounded-full border-2 dark:border-white dark:md:hover:bg-gray-900 border-black px-2 py-2 md:hover:bg-gray-200"}>See all</div>
                 </div>
                 <Losers setStock={props.setStock}/>
             </div>
@@ -72,7 +72,7 @@ export default function Markets(props){
             <div className={" row-span-5 p-2"}>
                 <div className={"flex justify-between mb-2"}>
                     <div className={"text-4xl"}>Most traded</div>
-                    <div className={"cursor-pointer rounded-full border-2 dark:border-white dark:hover:bg-gray-900 border-black px-2 py-2 hover:bg-gray-200"}>See all</div>
+                    <div className={"cursor-pointer rounded-full border-2 dark:border-white dark:md:hover:bg-gray-900 border-black px-2 py-2 md:hover:bg-gray-200"}>See all</div>
                 </div>
                 <Traded setStock={props.setStock}/>
             </div>
@@ -80,25 +80,25 @@ export default function Markets(props){
                 <div className="flex flex-col">
                     <div className={"py-6 px-4 text-4xl border-b-2 border-black dark:border-white"}>Learn</div>
                     <a href={"https://www.investopedia.com/terms/s/spottrade.asp"}>
-                        <div className={"cursor-pointer py-3 px-4 text-2xl border-b-2 border-black hover:bg-gray-200 dark:border-white dark:hover:bg-gray-900"}>
+                        <div className={"cursor-pointer py-3 px-4 text-2xl border-b-2 border-black md:hover:bg-gray-200 dark:border-white dark:md:hover:bg-gray-900"}>
                             <div>Spot</div>
                             <div className={"text-sm"}>Direct buying and selling of stocks</div>
                         </div>
                     </a>
                     <a href={"https://www.investopedia.com/terms/c/crossmargining.asp#:~:text=Key%20Takeaways,across%20all%20of%20their%20accounts."}>
-                        <div className={"cursor-pointer py-3 px-4 text-2xl border-b-2 border-black hover:bg-gray-200 dark:border-white dark:hover:bg-gray-900"}>
+                        <div className={"cursor-pointer py-3 px-4 text-2xl border-b-2 border-black md:hover:bg-gray-200 dark:border-white dark:md:hover:bg-gray-900"}>
                             <div>Cross Margin</div>
                             <div className={"text-sm"}>Amplify profits with leverage in stocks</div>
                         </div>
                     </a>
                     <a href={"https://www.investopedia.com/terms/m/margin.asp"}>
-                        <div className={"cursor-pointer py-3 px-4 text-2xl border-b-2 border-black hover:bg-gray-200 dark:border-white dark:hover:bg-gray-900"}>
+                        <div className={"cursor-pointer py-3 px-4 text-2xl border-b-2 border-black md:hover:bg-gray-200 dark:border-white dark:md:hover:bg-gray-900"}>
                             <div>Isolated Margin</div>
                             <div className={"text-sm"}>Safer leverage usage in stock trading</div>
                         </div>
                     </a>
                     <a href={"https://www.investopedia.com/terms/g/grid-trading.asp#:~:text=Grid%20trading%20involves%20placing%20buy,orders%20below%20the%20set%20price."}>
-                        <div className={"cursor-pointer py-3 px-4 text-2xl border-b-2 border-black hover:bg-gray-200 dark:border-white dark:hover:bg-gray-900"}>
+                        <div className={"cursor-pointer py-3 px-4 text-2xl border-b-2 border-black md:hover:bg-gray-200 dark:border-white dark:md:hover:bg-gray-900"}>
                             <div>Grid Automated</div>
                             <div className={"text-sm"}>Automated stock trading using programmed algorithms</div>
                         </div>

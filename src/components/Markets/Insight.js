@@ -42,14 +42,14 @@ export default function Insight(props){
         return(
             <div className={"flex flex-col dark:bg-black dark:divide-white dark:text-white space-y-4 justify-center items-center"}>
                 <h1 className={"text-3xl md:text-5xl text-center"}>Not enough information.</h1>
-                <button onClick={() => setTicker("TSLA")} className={"cursor-pointer rounded-full border-2 dark:border-white dark:hover:bg-gray-900 border-black px-2 py-2 hover:bg-gray-200"}>Reset</button>
+                <button onClick={() => setTicker("TSLA")} className={"cursor-pointer rounded-full border-2 dark:border-white dark:md:hover:bg-gray-900 border-black px-2 py-2 md:hover:bg-gray-200"}>Reset</button>
             </div>
         )
     }
 
     return(
         <div  className={"cursor-pointer h-[340px] overflow-y-scroll no-scrollbar"}>
-            <div className={"border-y-2 border-white"}>
+            <div className={"border-y-2 border-black dark:border-white"}>
                 <Searchbar size={"mini"} setStock={handleClick}/>
             </div>
             <div onClick={() =>  props.setStock(ticker)} className="flex flex-col justify-center text-center pt-8">

@@ -32,21 +32,21 @@ export default function Trade(props){
             <div className={"border-t-2 dark:border-white border-black border-l-2 row-span-3"}>
                 <div className={"flex justify-between p-2"}>
                     <div className={"text-2xl"}>Popular</div>
-                    <div className={"cursor-pointer rounded-full border-2 dark:border-white dark:hover:bg-gray-900 border-black px-2 py-2 hover:bg-gray-200"}>See all</div>
+                    <div className={"cursor-pointer rounded-full border-2 dark:border-white dark:md:hover:bg-gray-900 border-black px-2 py-2 md:hover:bg-gray-200"}>See all</div>
                 </div>
                 <Favourites setStock={props.setStock} array={props.popularData}/>
             </div>
             <div className={"border-t-2 dark:border-white border-black border-l-2 row-span-5 p-2"}>
                 <div className={"flex justify-between mb-2 "}>
                     <div className={"text-4xl"}>News</div>
-                    <div className={"cursor-pointer rounded-full border-2 dark:border-white dark:hover:bg-gray-900 border-black px-2 py-2 hover:bg-gray-200"}>See all</div>
+                    <div className={"cursor-pointer rounded-full border-2 dark:border-white dark:md:hover:bg-gray-900 border-black px-2 py-2 md:hover:bg-gray-200"}>See all</div>
                 </div>
                 <News  news={news}/>
             </div>
             <div className={"border-t-2 dark:border-white border-black border-l-2 row-span-3"}>
                 <div className={"flex justify-between p-2"}>
                     <div className={"text-2xl"}>Favourites</div>
-                    <div className={"cursor-pointer rounded-full border-2 dark:border-white dark:hover:bg-gray-900 border-black px-2 py-2 hover:bg-gray-200"}>See all</div>
+                    <div className={"cursor-pointer rounded-full border-2 dark:border-white dark:md:hover:bg-gray-900 border-black px-2 py-2 md:hover:bg-gray-200"}>See all</div>
                 </div>
                 <Favourites setStock={props.setStock} array={props.favoritesData}/>
             </div>

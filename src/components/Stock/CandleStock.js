@@ -132,7 +132,7 @@ export default function CandleStock(props){
             },
             labels: {
                 style: {
-                    colors: isDarkMode() ? '#000000 ': '#ffffff',
+                    colors: isDarkMode() ? '#ffffff': '#000000',
                     fontFamily: 'Space Mono'
                 }
             }
