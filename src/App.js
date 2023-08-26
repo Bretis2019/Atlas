@@ -20,7 +20,11 @@ function App() {
 
     const handleStock = (ticker) => {
         setStock(ticker);
-        setPage("");
+        if(ticker === ""){
+            setPage("Markets");
+        }else{
+            setPage("");
+        }
     }
 
     const [show, setShow] = useState(false);

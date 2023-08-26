@@ -117,7 +117,10 @@ export default function Stock(props){
     if(!description || !description.name || description.name.length === 0){
         return(
             <div className={"dark:bg-black dark:divide-white dark:text-white w-[100svw] md:w-[82svw] h-[93vh] border-2 flex justify-center items-center"}>
-                <h1 className={"text-3xl md:text-5xl text-center"}>Sorry we don't have that ticker yet</h1>
+                <div className="flex flex-col items-center space-y-4">
+                    <h1 className={"text-3xl md:text-5xl text-center"}>Sorry we don't have that ticker yet</h1>
+                    <button onClick={() => props.setStock("")} className={"cursor-pointer rounded-full border-2 dark:border-white dark:md:hover:bg-gray-900 border-black px-2 py-2 md:hover:bg-gray-200"}>Reset</button>
+                </div>
             </div>
         )
     }

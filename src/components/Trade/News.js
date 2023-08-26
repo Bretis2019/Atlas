@@ -26,7 +26,7 @@ export default function News(){
             }).catch(error => console.log(error));
     },[]);
 
-    const Elements = news.slice(0,25).map(item => {
+    const Elements = news.map(item => {
         const url  = item.banner_image ? item.banner_image : "https://images.unsplash.com/photo-1611974789855-9c2a0a7236a3?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80";
         return (
             <a href={item.url} target={"_blank"} className={"my-8"}>

@@ -77,14 +77,12 @@ export default function Markets(props){
             <div className={"row-span-3 p-2"}>
                 <div className={"flex justify-between"}>
                     <div className={"text-2xl"}>Top Gainers</div>
-                    <div className={"cursor-pointer rounded-full border-2 dark:border-white dark:md:hover:bg-gray-900 border-black px-2 py-2 md:hover:bg-gray-200"}>See all</div>
                 </div>
                 <Gainers setStock={props.setStock}/>
             </div>
             <div className={"row-span-3 p-2"}>
                 <div className={"flex justify-between"}>
                     <div className={"text-2xl"}>Top Losers</div>
-                    <div className={"cursor-pointer rounded-full border-2 dark:border-white dark:md:hover:bg-gray-900 border-black px-2 py-2 md:hover:bg-gray-200"}>See all</div>
                 </div>
                 <Losers setStock={props.setStock}/>
             </div>
@@ -97,7 +95,6 @@ export default function Markets(props){
             <div className={" row-span-5 p-2"}>
                 <div className={"flex justify-between mb-2"}>
                     <div className={"text-4xl"}>Most traded</div>
-                    <div className={"cursor-pointer rounded-full border-2 dark:border-white dark:md:hover:bg-gray-900 border-black px-2 py-2 md:hover:bg-gray-200"}>See all</div>
                 </div>
                 <Traded setStock={props.setStock}/>
             </div>
