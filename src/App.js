@@ -6,6 +6,7 @@ import Trade from "./components/Trade/Trade";
 import {useState} from "react";
 import Dashboard from "./components/Dashboard/Dashboard";
 import Stock from "./components/Stock/Stock";
+import Order from "./components/Order/Order";
 function App() {
 
     const[stock, setStock] = useState("");
@@ -15,7 +16,9 @@ function App() {
 
     const handlePageChange = (newPage) => {
         setPage(newPage);
-        setStock("");
+        if(newPage !== "Order"){
+            setStock("");
+        }
     };
 
     const handleStock = (ticker) => {
@@ -38,7 +41,7 @@ function App() {
         <Navbar onShow={handleShow} setStock={handleStock}/>
       <div className={"flex"}>
           <Sidebar onPageChange={handlePageChange} page={page} show={show}/>
-          {stock !== "" ? <Stock ticker={stock} setStock={handleStock}/> : page === "Markets" ? <Markets setStock={handleStock}/> :
+          {page === "Order" ? <Order ticker={stock}/> : stock !== "" ? <Stock ticker={stock} setStock={handleStock} onPageChange={handlePageChange}/> : page === "Markets" ? <Markets setStock={handleStock} onPageChange={handlePageChange}/> :
               page === "Trade" ? <Trade popularData={popular} favoritesData={favorites} setStock={handleStock}/>: <Dashboard/>}
       </div>
     </div>

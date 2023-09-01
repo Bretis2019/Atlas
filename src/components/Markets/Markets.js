@@ -31,6 +31,11 @@ export default function Markets(props){
             });
     },[]);
 
+    function handleETF(ticker){
+        props.onPageChange("Order");
+        props.setStock(ticker);
+    }
+
     if(loading){
         return (
             <div className={"flex items-center justify-center dark:bg-black dark:divide-white dark:text-white w-[100svw] md:w-[82svw] md:h-[93svh] border-r-2 md:border-r-0"}>
@@ -58,7 +63,7 @@ export default function Markets(props){
             <div className={"border-t-2 dark:border-white border-black border-l-2 row-span-3"}>
                 <div className={"flex flex-col"}>
                     <div className={"py-7 px-4 text-5xl border-b-2 dark:border-white border-black"}>Markets</div>
-                    <div className={"p-2 border-b-2 border-black dark:border-white"}>
+                    <div onClick={() => handleETF("spy")} className={"cursor-pointer p-2 border-b-2 border-black dark:border-white"}>
                         <div className={"flex items-center space-x-2"}>
                             <div className={"text-2xl"}>S&P 500</div>
                             <div className={`text-${sp[0] < 0 ? 'red-700' : 'green-700'}`}>{sp[0].toFixed(2)}%</div>
@@ -66,7 +71,7 @@ export default function Markets(props){
                         <div className={"text-4xl"}>${Number(sp[1]).toFixed(2)}</div>
                     </div>
                     <div className={"p-2"}>
-                        <div className={"flex items-center space-x-2"}>
+                        <div onClick={() => handleETF("dji")} className={"cursor-pointer flex items-center space-x-2"}>
                             <div className={"text-2xl"}>Dow Jones</div>
                             <div className={`text-${dji[0] < 0 ? 'red-700' : 'green-700'}`}>{dji[0].toFixed(2)}%</div>
                         </div>

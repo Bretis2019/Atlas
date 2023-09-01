@@ -2,7 +2,7 @@ import {useEffect, useState} from "react";
 import MiniCard from "./MiniCard";
 import CandleStock from "./CandleStock";
 import BarChart from "./BarChart";
-
+import "./StockDescription.css"
 function roundToFirstNonZeroDecimal(number) {
     const strNumber = number.toString();
     const decimalIndex = strNumber.indexOf('.');
@@ -128,7 +128,10 @@ export default function Stock(props){
     return(
         <div className={"dark:bg-black dark:divide-white dark:text-white w-[100svw] md:w-[82svw] md:h-[93svh] grid grid-cols-1 md:grid-cols-2 grid-rows-6 divide-x-2 divide-y-2 divide-black border-r-2 md:border-r-0"}>
             <div className={"border-t-2 dark:border-white border-black border-l-2 row-span-3"}>
-                <div className={"py-7 px-4 flex justify-between items-center space-x-4"}>
+                <div onClick={() => props.onPageChange("Order")} className={"cursor-pointer py-7 px-4 flex justify-between items-center space-x-4"}>
+                    <div className={"absolute top-16 right-2 md:top-14 md:right-[41svw]"}>
+                        <svg width="35px" height="35px" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><g id="SVGRepo_bgCarrier" strokeWidth={0} /><g id="SVGRepo_tracerCarrier" strokeLinecap="round" strokeLinejoin="round" /><g id="SVGRepo_iconCarrier">{" "}<path className={"dark:stroke-white"} d="M7 17L17 7M17 7H8M17 7V16" stroke="#000000" strokeWidth={2} strokeLinecap="round" strokeLinejoin="round"/>{" "}</g></svg>
+                    </div>
                     <div className="flex items-center">
                         <img className={"h-[50px] w-[50px] object-contain rounded-lg"} src={getFirstWord(description.name) === "Meta" ? "https://logo.clearbit.com/https://www.meta.com" : description.logo} alt={description.name + "logo"} loading="lazy"/>
                         <div className={"px-2 text-3xl md:text-4xl"}>{getFirstWord(description.name)}</div>
@@ -139,8 +142,11 @@ export default function Stock(props){
                     </div>
                 </div>
                 <div className={"py-2 space-y-4 px-2  border-t-2 dark:border-white border-black space-x-4 flex flex-col overflow-hidden max-h-[330px] md:max-h-[235px]"}>
-                    <div className="text-4xl px-2">Description</div>
-                    <div onClick={() => {window.location.href = description.logo.replace("https://logo.clearbit.com/", "")}}>{description.description}</div>
+                    <div className="flex justify-between">
+                        <div className="text-4xl px-2">Description</div>
+                        <button onClick={() => {window.location.href = description.logo.replace("https://logo.clearbit.com/", "")}} className={"cursor-pointer rounded-full border-2 dark:border-white dark:md:hover:bg-gray-900 border-black px-2 py-2 md:hover:bg-gray-200"}>Visit site</button>
+                    </div>
+                    <div className={"cutoff-text"}>{description.description}</div>
                 </div>
             </div>
             <div className={"border-t-2 dark:border-white border-black border-l-2 row-span-4"}>
