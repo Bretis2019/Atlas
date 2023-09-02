@@ -37,6 +37,7 @@ export default function Landing(){
             headers: {
                 "Content-Type": "application/json",
             },
+            mode: "no-cors",
             credentials: "include",
             body: JSON.stringify({
                 username: registerUsername,
@@ -62,6 +63,7 @@ export default function Landing(){
             headers: {
                 "Content-Type": "application/json",
             },
+            mode: "no-cors",
             credentials: "include",
             body: JSON.stringify({
                 username: loginUsername,
@@ -84,6 +86,7 @@ export default function Landing(){
         fetch("https://atlasauth.onrender.com/username", {
             method: "GET",
             credentials: "include",
+            mode: "no-cors",
         })
             .then((res) => res.json())
             .then((data) => {
@@ -96,6 +99,7 @@ export default function Landing(){
         fetch("https://atlasauth.onrender.com/logout", {
             method: "GET",
             credentials: "include",
+            mode: "no-cors",
         })
            .then((res) => res.json())
            .then(() => {
