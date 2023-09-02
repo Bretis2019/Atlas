@@ -32,7 +32,7 @@ export default function Landing(){
     const signup = () => {
         logout();
         setLoading(true);
-        fetch("http://localhost:5000/signup", {
+        fetch("https://atlasauth.onrender.com/signup", {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
@@ -57,7 +57,7 @@ export default function Landing(){
 
     const login = () => {
         setLoading(true);
-        fetch("http://localhost:5000/login", {
+        fetch("https://atlasauth.onrender.com/login", {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
@@ -81,7 +81,7 @@ export default function Landing(){
     };
 
     const getUser = () => {
-        fetch("http://localhost:5000/username", {
+        fetch("https://atlasauth.onrender.com/username", {
             method: "GET",
             credentials: "include",
         })
@@ -93,7 +93,7 @@ export default function Landing(){
     };
 
     const logout = () => {
-        fetch("http://localhost:5000/logout", {
+        fetch("https://atlasauth.onrender.com/logout", {
             method: "GET",
             credentials: "include",
         })
