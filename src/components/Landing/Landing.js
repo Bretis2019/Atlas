@@ -1,4 +1,4 @@
-import {useEffect, useState} from "react";
+import {useState} from "react";
 
 
 function Spinner (){
@@ -19,96 +19,71 @@ function Spinner (){
     )
 }
 
-export default function Landing(){
+export default function Landing(props){
 
     const [registerUsername, setRegisterUsername] = useState("");
     const [registerPassword, setRegisterPassword] = useState("");
     const [loginUsername, setLoginUsername] = useState("");
     const [loginPassword, setLoginPassword] = useState("");
     const [haveaccount, setHaveaccount] = useState(true);
-    const [data, setData] = useState(null);
     const [loading, setLoading] = useState(false);
-    const [error, setError] = useState(null);
-    const signup = () => {
-        logout();
+
+    async function signup(){
         setLoading(true);
-        fetch("https://atlasauth.onrender.com/signup", {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json",
-            },
-            mode: "no-cors",
-            credentials: "include",
-            body: JSON.stringify({
-                username: registerUsername,
-                password: registerPassword,
-            }),
-        })
-            .then(async res => {
-                if (res.status === 200) {
-                    setHaveaccount(true);
-                } else {
-                    const result = await res.json();
-                    setError(result);
-                }
+        const myHeaders = new Headers();
+        myHeaders.append("Content-Type", "application/json");
+
+        const raw = JSON.stringify({
+            "username": registerUsername,
+            "password": registerPassword
+        });
+
+        const requestOptions = {
+            method: 'POST',
+            headers: myHeaders,
+            body: raw,
+            redirect: 'follow'
+        };
+
+        fetch("https://atlasapi-4oe2.onrender.com/user/signup", requestOptions)
+            .then(response => response.json())
+            .then(result => {
+                console.log(result.message);
                 setLoading(false);
+                setHaveaccount(true);
             })
-            .catch((error) => setError(error));
-    };
-
-    const login = () => {
-        setLoading(true);
-        fetch("https://atlasauth.onrender.com/login", {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json",
-            },
-            mode: "no-cors",
-            credentials: "include",
-            body: JSON.stringify({
-                username: loginUsername,
-                password: loginPassword,
-            }),
-        })
-            .then(async res => {
-                if (res.status === 200) {
-                    getUser();
-                } else {
-                    const result = await res.json();
-                    setError(result);
-                }
-                setLoading(false);
-            })
-            .catch((error) => setError(error));
-    };
-
-    const getUser = () => {
-        fetch("https://atlasauth.onrender.com/username", {
-            method: "GET",
-            credentials: "include",
-            mode: "no-cors",
-        })
-            .then((res) => res.json())
-            .then((data) => {
-                setData(data);
-            })
-            .catch((error) => setError(error));
-    };
-
-    const logout = () => {
-        fetch("https://atlasauth.onrender.com/logout", {
-            method: "GET",
-            credentials: "include",
-            mode: "no-cors",
-        })
-           .then((res) => res.json())
-           .then(() => {
-               setData(null);
-               setLoginPassword("");
-               setLoginUsername("");
-           })
-           .catch((error) => console.error("Error:", error));
+            .catch(error => console.log('error', error));
     }
+
+    async function login(){
+        setLoading(true);
+        const myHeaders = new Headers();
+        myHeaders.append("Content-Type", "application/json");
+
+        const raw = JSON.stringify({
+            "username": loginUsername,
+            "password": loginPassword
+        });
+
+        const requestOptions = {
+            method: 'POST',
+            headers: myHeaders,
+            body: raw,
+            redirect: 'follow'
+        };
+
+        fetch("https://atlasapi-4oe2.onrender.com/user/login", requestOptions)
+            .then(response => response.json())
+            .then(result => {
+                if(typeof(result.token) === "string") {
+                    localStorage.setItem("token", result.token);
+                    props.onPageChange("Dashboard");
+                }setLoading(false);
+            })
+            .catch(error => console.log('error', error));
+    }
+
+
 
 
     return (
@@ -125,7 +100,6 @@ export default function Landing(){
                             <p>don't have an account ?</p>
                             <button className={"underline"} onClick={() => setHaveaccount(false)}>Register</button>
                         </div>
-                        {data ? <h1 className={"text-center"}>Welcome Back {data.username}</h1> : null}
                     </div>}
                     {!haveaccount && <div className={"flex flex-col space-y-16 justify-center bg-white h-[100svh] w-[45svw] rounded-l-2xl shadow-2xl"}>
                         <div className={"flex flex-col items-center space-y-8"}>

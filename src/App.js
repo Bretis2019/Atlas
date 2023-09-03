@@ -13,7 +13,7 @@ function App() {
     const[stock, setStock] = useState("");
     const [favorites, setFavorites] = useState(["AAPL","META","GOOG"]);
     const [popular, setPopular] = useState(["TSLA","AMZN","MSFT",]);
-    const [page, setPage] = useState("Markets");
+    const [page, setPage] = useState("Landing");
 
     const handlePageChange = (newPage) => {
         setPage(newPage);
@@ -36,16 +36,18 @@ function App() {
     const handleShow = () => {
         setShow(prevState => !prevState);
     };
-//<div className={"md:overflow-hidden overflow-x-hidden bg-white dark:bg-black w-[100svw] h-[100svh] no-scrollbar"}>
-//         <Navbar onShow={handleShow} setStock={handleStock}/>
-//       <div className={"flex"}>
-//           <Sidebar onPageChange={handlePageChange} page={page} show={show}/>
-//           {page === "Order" ? <Order ticker={stock}/> : stock !== "" ? <Stock ticker={stock} setStock={handleStock} onPageChange={handlePageChange}/> : page === "Markets" ? <Markets setStock={handleStock} onPageChange={handlePageChange}/> :
-//               page === "Trade" ? <Trade popularData={popular} favoritesData={favorites} setStock={handleStock}/>: <Dashboard/>}
-//       </div>
-//     </div>
+
   return (
-    <Landing />
+      <>
+          {page === "Landing" ? (<Landing onPageChange={handlePageChange}/>) : (<div className={"md:overflow-hidden overflow-x-hidden bg-white dark:bg-black w-[100svw] h-[100svh] no-scrollbar"}>
+              <Navbar onShow={handleShow} setStock={handleStock}/>
+              <div className={"flex"}>
+                  <Sidebar onPageChange={handlePageChange} page={page} show={show}/>
+                  {page === "Order" ? <Order ticker={stock}/> : stock !== "" ? <Stock ticker={stock} setStock={handleStock} onPageChange={handlePageChange}/> : page === "Markets" ? <Markets setStock={handleStock} onPageChange={handlePageChange}/> :
+                      page === "Trade" ? <Trade popularData={popular} favoritesData={favorites} setStock={handleStock}/>: <Dashboard/>}
+              </div>
+          </div>)}
+      </>
   );
 }
 
