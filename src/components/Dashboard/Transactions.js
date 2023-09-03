@@ -31,7 +31,7 @@ export default function Transactions(){
     })
 
     return (
-        <div className={"flex flex-col border-t-2 p-2"}>
+        <div className={"flex flex-col border-t-2 p-2 max-h-[300px] md:max-h-[120px] overflow-y-scroll no-scrollbar space-y-8"}>
             {elements}
         </div>
     )

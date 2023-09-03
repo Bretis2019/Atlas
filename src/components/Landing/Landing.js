@@ -88,8 +88,8 @@ export default function Landing(props){
 
     return (
         <div className={"bg-gray-100 overflow-hidden"}>
-            <div className={"bg-[url('https://images.unsplash.com/photo-1592495989226-03f88104f8cc?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1824&q=80')] bg-[length:900px] bg-no-repeat bg-left h-[100svh] w-[100svw] overflow-hidden flex flex-row-reverse"}>
-                    {haveaccount && <div className={"flex flex-col space-y-16 items-center justify-center bg-white h-[100svh] w-[45svw] rounded-l-2xl shadow-2xl"}>
+            <div className={"md:bg-[url('https://images.unsplash.com/photo-1592495989226-03f88104f8cc?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1824&q=80')] md:bg-[length:900px] bg-no-repeat bg-left h-[100svh] w-[100svw] overflow-hidden flex flex-row-reverse"}>
+                    {haveaccount && <div className={"flex flex-col space-y-16 items-center justify-center bg-white h-[100svh] w-[100svw] md:w-[45svw] rounded-l-2xl shadow-2xl"}>
                         <div className={"flex flex-col items-center space-y-8"}>
                             <h1 className={"text-4xl"}>Login</h1>
                             <input className={"border-2 rounded-2xl border-dashed active:border-solid border-black px-4 py-2 text-gray-700"} type={"text"} placeholder={"username"} onChange={(e) => setLoginUsername(e.target.value)} value={loginUsername}/>
@@ -101,7 +101,7 @@ export default function Landing(props){
                             <button className={"underline"} onClick={() => setHaveaccount(false)}>Register</button>
                         </div>
                     </div>}
-                    {!haveaccount && <div className={"flex flex-col space-y-16 justify-center bg-white h-[100svh] w-[45svw] rounded-l-2xl shadow-2xl"}>
+                    {!haveaccount && <div className={"flex flex-col space-y-16 justify-center bg-white h-[100svh] w-[100svw] md:w-[45svw] rounded-l-2xl shadow-2xl"}>
                         <div className={"flex flex-col items-center space-y-8"}>
                             <h1 className={"text-4xl"}>Sign up</h1>
                             <input className={"border-2 rounded-2xl border-dashed active:border-solid border-black px-4 py-2 text-gray-700"} type={"text"} placeholder={"username"} onChange={(e) => setRegisterUsername(e.target.value)} value={registerUsername}/>

@@ -58,18 +58,22 @@ export default function LineGraph(props){
         dataLabels: {
             enabled: false,
         },
+        tooltip: {
+            theme: isDarkMode() ?  'dark' : 'light'
+        },
     };
 
 
     const series = [
         {
             name: 'Portfolio',
-            data: changeRates1, // Use changeRates1 for Series 1
+            data: changeRates1,
         },
         {
             name: 'S&P 500',
-            data: changeRates2, // Use changeRates2 for Series 2
+            data: changeRates2,
         },
+
     ];
 
     return (

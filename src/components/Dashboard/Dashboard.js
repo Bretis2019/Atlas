@@ -119,7 +119,7 @@ export default function Dashboard(){
                             <div className={'text-2xl'}>${commafy(balance.toFixed(2))}</div>
                         </div>
                     </div>
-                    <div className={"cursor-pointer p-2 border-y-2 border-black dark:border-white"}>
+                    <div className={"cursor-pointer p-2 border-t-2 border-black dark:border-white"}>
                         <div className={"flex justify-between items-center space-x-2"}>
                             <div className={"text-2xl"}>P&L</div>
                             <div className={`text-${pl < 0 ? 'red-700' : 'green-700'} text-2xl`}>${commafy(pl.toFixed(2))}</div>
@@ -129,7 +129,7 @@ export default function Dashboard(){
             </div>
             <div className={"row-span-3 col-span-2"}>
                 <div className={"flex flex-col justify-between  p-2"}>
-                    <div className={"py-5 px-2 text-4xl"}>Recent transactions</div>
+                    <div className={"py-5 px-2 text-3xl md:text-4xl"}>Recent transactions</div>
                     <div className={"flex justify-between items-center"}>
                         <h1>Ticker</h1>
                         <h1>Amount</h1>
@@ -141,7 +141,7 @@ export default function Dashboard(){
             </div>
             <div className={"row-span-5"}>
                 <div className={"flex justify-between flex-col p-2"}>
-                    <div className={"py-5 px-2 text-4xl"}>Open positions</div>
+                    <div className={"py-5 px-2 text-3xl md:text-4xl"}>Open positions</div>
                     <div className={"flex justify-between items-center"}>
                         <h1>Ticker</h1>
                         <h1>Average price</h1>
@@ -152,7 +152,7 @@ export default function Dashboard(){
             </div>
             <div className={"row-span-5 col-span-2"}>
                 <div className={"flex justify-between"}>
-                        <div className={"py-7 px-4 text-4xl"}>Performance</div>
+                        <div className={"py-7 px-4 text-3xl md:text-4xl"}>Performance</div>
                 </div>
                 <BalanceHistory />
             </div>

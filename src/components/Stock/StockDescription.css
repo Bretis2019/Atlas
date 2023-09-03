@@ -21,3 +21,14 @@
         background: linear-gradient(to bottom, transparent, black);
     }
 }
+
+@media only screen and (max-width: 600px) {
+    .cutoff-text {
+        --max-lines: 11;
+        --line-height: 1.4;
+        max-height: calc(var(--max-lines) * 1em * var(--line-height));
+        line-height: var(--line-height);
+        overflow: hidden;
+        position: relative;
+    }
+}
