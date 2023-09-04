@@ -13,7 +13,7 @@ function App() {
     const[stock, setStock] = useState("");
     const [favorites, setFavorites] = useState(["AAPL","META","GOOG"]);
     const [popular, setPopular] = useState(["TSLA","AMZN","MSFT",]);
-    const [page, setPage] = useState("Landing");
+    const [page, setPage] = useState(localStorage.getItem("token") && localStorage.getItem("token").trim() !== "" ? "Dashboard" : "Landing");
 
     const handlePageChange = (newPage) => {
         setPage(newPage);
