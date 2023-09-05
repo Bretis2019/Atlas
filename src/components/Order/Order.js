@@ -49,7 +49,9 @@ export default function Order(props){
         })
             .then(res => res.json())
             .then(data => {
-                localStorage.setItem('token', data.token);
+                if(data.token && data.token.trim() !== ""){
+                    localStorage.setItem('token', data.token);
+                }
                 setLoading(false);
                 setSuccess(data.message);
             })

@@ -11,6 +11,7 @@
     "alphavantage": "^2.4.1",
     "apexcharts": "^3.41.0",
     "axios": "^1.5.0",
+    "chargily-epay-react-js": "^1.0.0",
     "papaparse": "^5.4.1",
     "react": "^18.2.0",
     "react-apexcharts": "^1.4.1",

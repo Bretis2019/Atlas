@@ -92,7 +92,7 @@ export default function BalanceHistory(){
 
     return (
         <div>
-            {(data.length > 0 && sp.length > 0) && <LineGraph data1={data} data2={sp} />}
+            {(data.length > 2 && sp.length > 2) ? <LineGraph data1={data} data2={sp} /> : <h1 className={"text-center text-3xl dark:text-white"}>Not enough data</h1>}
         </div>
     )
 }

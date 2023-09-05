@@ -39,12 +39,12 @@ export default function LineGraph(props){
                     fontFamily: 'Space Mono'
                 }
             },
-            categories: dates1.slice(1), // Use dates1 or dates2 as the x-axis values, excluding the first date
+            categories: dates1.slice(1),
         },
         yaxis: {
             labels: {
                 formatter: function (value) {
-                    return value.toFixed(2); // Limit to two decimal places
+                    return value.toFixed(2);
                 },
                 style: {
                     colors: isDarkMode() ? '#ffffff': '#000000',

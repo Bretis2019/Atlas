@@ -8,6 +8,7 @@ import Dashboard from "./components/Dashboard/Dashboard";
 import Stock from "./components/Stock/Stock";
 import Order from "./components/Order/Order";
 import Landing from "./components/Landing/Landing";
+import Wallet from "./components/Wallet/Wallet";
 function App() {
 
     const[stock, setStock] = useState("");
@@ -44,7 +45,7 @@ function App() {
               <div className={"flex"}>
                   <Sidebar onPageChange={handlePageChange} page={page} show={show}/>
                   {page === "Order" ? <Order ticker={stock}/> : stock !== "" ? <Stock ticker={stock} setStock={handleStock} onPageChange={handlePageChange}/> : page === "Markets" ? <Markets setStock={handleStock} onPageChange={handlePageChange}/> :
-                      page === "Trade" ? <Trade popularData={popular} favoritesData={favorites} setStock={handleStock}/>: <Dashboard/>}
+                      page === "Trade" ? <Trade popularData={popular} favoritesData={favorites} setStock={handleStock}/>: page === "Wallet" ? <Wallet /> : <Dashboard/>}
               </div>
           </div>)}
       </>
