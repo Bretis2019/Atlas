@@ -4,6 +4,7 @@ export default function OpenPositions(props){
             <div className={"flex justify-between items-center px-2"} key={item.ticker}>
                 <h1>{item.ticker}</h1>
                 <h1>${item.averagePrice}</h1>
+                <h1 className={`text-${item.profitLoss < 0 ? 'red-700' : 'green-700'}`}>${(item.profitLoss).toFixed(2)}</h1>
                 <h1>{item.amount}x</h1>
             </div>
         ))
