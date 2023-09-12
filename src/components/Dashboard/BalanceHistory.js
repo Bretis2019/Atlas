@@ -36,12 +36,15 @@ export default function BalanceHistory(){
                 });
                 setData(elements);
             })
-            .catch(err => console.log(err));
+            .catch(err => {
+                console.log(err);
+                setLoading(false);
+            });
     }, []);
 
     useEffect(() => {
         if(data.length > 0) {
-            fetch(`https://atlasapi-4oe2.onrender.com/history?ticker=spy&from=${formatDateToYYYYMMDD(data[0].date)}&to=${formatDateToYYYYMMDD("Final")}&interval=1d`)
+            fetch(`https://atlasapi-4oe2.onrender.com/history?ticker=spy&from=${formatDateToYYYYMMDD(data[0].date)}&to=${formatDateToYYYYMMDD(data[data.length - 1].date)}&interval=1d`)
                 .then(response => response.json())
                 .then(data => {
                     const elements = data.map(item => {
@@ -57,6 +60,7 @@ export default function BalanceHistory(){
                 })
                 .catch(error => {
                     console.error('Error:', error);
+                    setLoading(false);
                 });
         }
     }, [data]);
