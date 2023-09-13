@@ -139,7 +139,7 @@ export default function Stock(props){
                         </div>
                         <div className={"flex max-md:flex-col space-x-4 max-md:space-y-4 items-center"}>
                             <div className={"text-2xl"}>${description.price.toFixed(2)}</div>
-                            <div className={`text-2xl text-${description.change < 0 ? "red-700" : "green-700"}`}>{roundToFirstNonZeroDecimal(description.change)}%</div>
+                            <div className={`text-2xl text-${description.change < 0 ? "red-700" : "green-700"}`}>{roundToFirstNonZeroDecimal(description.change * 100)}%</div>
                         </div>
                     </div>
                     <div className={"py-2 space-y-4 px-2  border-t-2 dark:border-white border-black space-x-4 flex flex-col overflow-hidden max-h-[330px] md:max-h-[235px]"}>
