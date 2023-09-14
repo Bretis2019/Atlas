@@ -1,15 +1,15 @@
 {
   "files": {
     "main.css": "/Atlas/static/css/main.33476f83.css",
-    "main.js": "/Atlas/static/js/main.8e43a371.js",
+    "main.js": "/Atlas/static/js/main.f9e42749.js",
     "static/js/651.7698e0e9.chunk.js": "/Atlas/static/js/651.7698e0e9.chunk.js",
     "index.html": "/Atlas/index.html",
     "main.33476f83.css.map": "/Atlas/static/css/main.33476f83.css.map",
-    "main.8e43a371.js.map": "/Atlas/static/js/main.8e43a371.js.map",
+    "main.f9e42749.js.map": "/Atlas/static/js/main.f9e42749.js.map",
     "651.7698e0e9.chunk.js.map": "/Atlas/static/js/651.7698e0e9.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.33476f83.css",
-    "static/js/main.8e43a371.js"
+    "static/js/main.f9e42749.js"
   ]
 }
