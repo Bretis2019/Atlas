@@ -4,7 +4,7 @@ import Transactions from "./Transactions";
 import BalanceHistory from "./BalanceHistory";
 
 
-function commafy( num ) {
+export function commafy( num ) {
     var str = num.toString().split('.');
     if (str[0].length >= 4) {
         str[0] = str[0].replace(/(\d)(?=(\d{3})+$)/g, '$1,');
@@ -15,7 +15,7 @@ function commafy( num ) {
     return str.join('.');
 }
 
-async function calculateProfitLoss(positions) {
+export async function calculateProfitLoss(positions) {
     let openPositions = [];
     let totalPositionValue = 0;
     let totalProfitLoss = 0;
