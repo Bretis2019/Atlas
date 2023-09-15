@@ -40,7 +40,7 @@ function App() {
     };
 
     function display(page){
-        if(stock !== ""){
+        if(stock !== "" && page !== "Order"){
             return <Stock ticker={stock} setStock={handleStock} onPageChange={handlePageChange}/>
         }
         switch(page){
