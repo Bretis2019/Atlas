@@ -1,4 +1,4 @@
-import {useState} from "react";
+import {useEffect, useState} from "react";
 
 
 function Spinner (){
@@ -27,6 +27,7 @@ export default function Landing(props){
     const [loginPassword, setLoginPassword] = useState("");
     const [haveaccount, setHaveaccount] = useState(true);
     const [loading, setLoading] = useState(false);
+    const [error, setError] = useState("");
 
     async function signup(){
         setLoading(true);
@@ -48,11 +49,15 @@ export default function Landing(props){
         fetch("https://atlasapi-4oe2.onrender.com/user/signup", requestOptions)
             .then(response => response.json())
             .then(result => {
-                console.log(result.message);
                 setLoading(false);
-                setHaveaccount(true);
+                if(result.status === 200){
+                    setHaveaccount(true);
+                }
+                else{
+                    setError(result.message);
+                }
             })
-            .catch(error => console.log('error', error));
+            .catch(error => setError(JSON.stringify(error)));
     }
 
     async function login(){
@@ -78,10 +83,17 @@ export default function Landing(props){
                 if(typeof(result.token) === "string") {
                     localStorage.setItem("token", result.token);
                     props.onPageChange("Dashboard");
-                }setLoading(false);
+                }else{
+                    setError(result.message);
+                }
+                setLoading(false);
             })
-            .catch(error => console.log('error', error));
+            .catch(error => setError(JSON.stringify(error)));
     }
+
+    useEffect(() => {
+        setError("");
+    }, [haveaccount]);
 
 
 
@@ -100,6 +112,7 @@ export default function Landing(props){
                             <p>don't have an account ?</p>
                             <button className={"underline"} onClick={() => setHaveaccount(false)}>Register</button>
                         </div>
+                        {error !== "" && <div className={"text-2xl text-center text-red-500"}>{error} !</div>}
                     </div>}
                     {!haveaccount && <div className={"flex flex-col space-y-16 justify-center bg-white h-[100svh] w-[100svw] md:w-[45svw] rounded-l-2xl shadow-2xl"}>
                         <div className={"flex flex-col items-center space-y-8"}>
@@ -112,6 +125,7 @@ export default function Landing(props){
                             <p>already have an account ?</p>
                             <button className={"underline"} onClick={() => setHaveaccount(true)}>Login</button>
                         </div>
+                        {error !== "" && <div className={"text-2xl text-center text-red-500"}>{error} !</div>}
                     </div>}
                 </div>
         </div>

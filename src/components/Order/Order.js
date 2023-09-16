@@ -137,7 +137,7 @@ export default function Order(props){
                     <button onClick={handleClick} id={"BUY"} className={"text-2xl px-4 py-2 cursor-pointer rounded-full border-2 dark:border-white bg-green-300 dark:bg-green-800 border-black md:hover:bg-green-900"}>{loading ? "Loading" : "Buy"}</button>
                     <button onClick={handleClick} id={"SELL"} className={"text-2xl px-4 py-2 cursor-pointer rounded-full border-2 dark:border-white bg-red-600 border-black md:hover:bg-red-700"}>{loading ? "Loading" : "Sell"}</button>
                 </div>
-                {success.length > 1? <h1 className={"text-5xl"}>{success}</h1> : <div></div>}
+                {success.length > 1? <h1 className={"text-5xl text-center"}>{success}</h1> : <div></div>}
             </div>
             <div className={"row-span-5 pb-8 md:pb-0"}>
                 <div className={"flex justify-between flex-col p-2"}>
