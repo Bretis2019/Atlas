@@ -21,7 +21,7 @@ function App() {
         if(newPage !== "Order"){
             setStock("");
         }
-        handleShow();
+        if(show){handleShow();}
     };
 
     const handleStock = (ticker) => {

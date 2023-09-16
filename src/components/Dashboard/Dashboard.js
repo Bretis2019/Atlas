@@ -201,7 +201,7 @@ export default function Dashboard(){
                 </div>
                 <OpenPositions array={openEnhanced}/>
             </div>
-            <div className={"row-span-5 col-span-2"}>
+            <div className={"row-span-5 col-span-2 pb-8 md:pb-0"}>
                 <div className={"flex justify-between"}>
                         <div className={"py-7 px-4 text-3xl md:text-4xl"}>Performance</div>
                 </div>
