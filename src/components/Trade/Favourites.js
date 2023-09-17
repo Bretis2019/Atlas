@@ -70,7 +70,7 @@ export default function Favourites(props) {
 
     if(tickersArray.length < 1){
         return(
-            <div className={"text-center text-2xl"}>
+            <div className={"text-center text-2xl pb-8"}>
                 Favorites not set yet.
             </div>
         )

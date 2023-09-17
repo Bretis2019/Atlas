@@ -28,6 +28,7 @@ export default function Landing(props){
     const [haveaccount, setHaveaccount] = useState(true);
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState("");
+    const [success, setSuccess] = useState("");
 
     async function signup(){
         setLoading(true);
@@ -84,7 +85,11 @@ export default function Landing(props){
                     localStorage.setItem("token", result.token);
                     props.onPageChange("Dashboard");
                 }else{
-                    setError(result.message);
+                    if(result.status !== 200){
+                        setError(result.message);
+                    }else{
+                        setSuccess(result.message);
+                    }
                 }
                 setLoading(false);
             })
@@ -101,7 +106,7 @@ export default function Landing(props){
     return (
         <div className={"bg-white overflow-hidden"}>
             <div className={"md:bg-[url('https://i.imgur.com/HOYPxM7.png')] md:bg-[length:900px] bg-no-repeat bg-left h-[100svh] w-[100svw] overflow-hidden flex flex-row-reverse"}>
-                    {haveaccount && <div className={"flex flex-col space-y-16 items-center justify-center h-[100svh] w-[100svw] md:w-[45svw] rounded-l-2xl shadow-2xl bg-white dark:bg-black dark:text-white"}>
+                    {haveaccount && <div className={"flex flex-col space-y-16 items-center justify-center h-[100svh] w-[100svw] md:w-[45svw] md:rounded-l-2xl shadow-2xl bg-white dark:bg-black dark:text-white"}>
                         <div className={"flex flex-col items-center space-y-8"}>
                             <h1 className={"text-4xl"}>Login</h1>
                             <input className={"border-2 rounded-2xl border-dashed active:border-solid border-black dark:border-white bg-gray-50 dark:bg-gray-800 dark:text-white  px-4 py-2 text-gray-700"} type={"text"} placeholder={"username"} onChange={(e) => setLoginUsername(e.target.value)} value={loginUsername}/>
@@ -114,7 +119,7 @@ export default function Landing(props){
                         </div>
                         {error !== "" && <div className={"text-2xl text-center text-red-500"}>{error} !</div>}
                     </div>}
-                    {!haveaccount && <div className={"flex flex-col space-y-16 justify-center bg-white dark:bg-black dark:text-white  h-[100svh] w-[100svw] md:w-[45svw] rounded-l-2xl shadow-2xl"}>
+                    {!haveaccount && <div className={"flex flex-col space-y-16 justify-center bg-white dark:bg-black dark:text-white  h-[100svh] w-[100svw] md:w-[45svw] md:rounded-l-2xl shadow-2xl"}>
                         <div className={"flex flex-col items-center space-y-8"}>
                             <h1 className={"text-4xl"}>Sign up</h1>
                             <input className={"border-2 rounded-2xl border-dashed active:border-solid border-black dark:border-white bg-gray-50 dark:bg-gray-800 dark:text-white px-4 py-2 text-gray-700"} type={"text"} placeholder={"username"} onChange={(e) => setRegisterUsername(e.target.value)} value={registerUsername}/>
@@ -126,6 +131,7 @@ export default function Landing(props){
                             <button className={"underline"} onClick={() => setHaveaccount(true)}>Login</button>
                         </div>
                         {error !== "" && <div className={"text-2xl text-center text-red-500"}>{error} !</div>}
+                        {success !== "" && <div className={"text-2xl text-center text-green-500"}>{success} !</div>}
                     </div>}
                 </div>
         </div>
