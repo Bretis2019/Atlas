@@ -8,42 +8,27 @@ function formatDateToYYYYMMDD(dateString) {
     const day = String(date.getDate()).padStart(2, '0');
     return `${year}-${month}-${day}`;
 }
-
-export default function BalanceHistory(){
+export default function BalanceHistory(props){
+    const {array} = props;
 
     const [data, setData] = useState([]);
     const [sp, setSp] = useState([]);
     const [loading, setLoading] = useState(false);
 
     useEffect(() => {
-        setLoading(true);
-        fetch('https://atlasapi-4oe2.onrender.com/user/balance/history', {
-            method: 'GET',
-            headers: {
-                'Content-Type': 'application/json',
-                'Authorization': `Bearer ${localStorage.getItem('token')}`
-            }
-        })
-            .then(res => res.json())
-            .then(data => {
-                const elements = data.map(item => {
-                    return (
-                        {
-                            date: formatDateToYYYYMMDD(item.date),
-                            balance : item.balance.toFixed(2)
-                        }
-                    )
-                });
-                setData(elements);
-            })
-            .catch(err => {
-                console.log(err);
-                setLoading(false);
-            });
-    }, []);
+        const elements = array.map(item => {
+            return (
+                {
+                    date: formatDateToYYYYMMDD(item.date),
+                    balance : item.balance.toFixed(2)
+                }
+            )
+        });
+        setData(elements);
+    }, [array]);
 
     useEffect(() => {
-        if(data.length > 0) {
+        if(data.length >= 2) {
             fetch(`https://atlasapi-4oe2.onrender.com/history?ticker=spy&from=${formatDateToYYYYMMDD(data[0].date)}&to=${formatDateToYYYYMMDD(data[data.length - 1].date)}&interval=1d`)
                 .then(response => response.json())
                 .then(data => {
@@ -88,7 +73,7 @@ export default function BalanceHistory(){
 
     return (
         <div>
-            {(data.length > 2 && sp.length > 2) ? <LineGraph data1={data} data2={sp} /> : <h1 className={"text-center text-3xl dark:text-white"}>Not enough data</h1>}
+            {sp.length > 2 ? <LineGraph data1={data} data2={sp} /> : <h1 className={"text-center text-3xl dark:text-white"}>Not enough data</h1>}
         </div>
     )
 }

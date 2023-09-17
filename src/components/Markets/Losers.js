@@ -22,7 +22,7 @@ export default function Losers(props){
         const formattedPrice = parseFloat(item.price).toFixed(2);
         const formattedPercentage = parseFloat(item.change).toFixed(2);
         return(
-            <div onClick={() =>  props.setStock(item.symbol)} className={"flex items-center justify-between space-y-4 cursor-pointer"}>
+            <div key={item.symbol} onClick={() =>  props.setStock(item.symbol)} className={"flex items-center justify-between space-y-4 cursor-pointer"}>
                 <div className={"text-xl font-bold"}>{item.symbol}</div>
                 <div><StockChart name={item.symbol}/></div>
                 <div className={"flex flex-col text-end"}>

@@ -71,6 +71,7 @@ export async function calculateProfitLoss(positions) {
 export default function Dashboard(props){
 
     const [balance, setBalance] = useState(0);
+    const [balanceHistory, setBalanceHistory] = useState([]);
     const [open, setOpen] = useState([]);
     const [openEnhanced, setOpenEnhanced] = useState([]);
     const [pl, setPl] = useState(0);
@@ -101,6 +102,7 @@ export default function Dashboard(props){
         })
             .then(res => res.json())
             .then(data => {
+                setBalanceHistory(data);
                 setBalance((data.slice(-1))[0].balance);
             })
             .catch(err => console.log(err));
@@ -193,7 +195,7 @@ export default function Dashboard(props){
                 <div className={"flex justify-between"}>
                         <div className={"py-7 px-4 text-3xl md:text-4xl"}>Performance</div>
                 </div>
-                <BalanceHistory />
+                <BalanceHistory array={balanceHistory}/>
             </div>
         </div>
         )
