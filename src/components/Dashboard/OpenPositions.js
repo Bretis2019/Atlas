@@ -1,7 +1,7 @@
 export default function OpenPositions(props){
 
     const elements = props.array.map(item => (
-            <div className={"flex justify-between items-center px-2"} key={item.ticker}>
+            <div className={"flex justify-between items-center px-2 cursor-pointer"} key={item.ticker} onClick={() =>  props.setStock(item.ticker)}>
                 <h1>{item.ticker}</h1>
                 <h1>${item.averagePrice.toFixed(2)}</h1>
                 <h1 className={`text-${item.profitLoss < 0 ? 'red-700' : 'green-700'}`}>${(item.profitLoss).toFixed(2)}</h1>

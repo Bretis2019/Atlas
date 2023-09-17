@@ -9,11 +9,10 @@ import Stock from "./components/Stock/Stock";
 import Order from "./components/Order/Order";
 import Landing from "./components/Landing/Landing";
 import Profile from "./components/Profile/Profile";
+import ErrorBoundary from "./ErrorBoundary";
 function App() {
 
     const[stock, setStock] = useState("");
-    const [favorites, setFavorites] = useState(["AAPL","META","GOOG"]);
-    const [popular, setPopular] = useState(["TSLA","AMZN","MSFT",]);
     const [page, setPage] = useState(localStorage.getItem("token") && localStorage.getItem("token").trim() !== "" ? "Markets" : "Landing");
 
     const handlePageChange = (newPage) => {
@@ -49,18 +48,18 @@ function App() {
             case "Markets":
                 return <Markets setStock={handleStock} onPageChange={handlePageChange}/>;
             case "Trade":
-                return <Trade popularData={popular} favoritesData={favorites} setStock={handleStock}/>
+                return <Trade setStock={handleStock}/>
             case "Profile":
                 return <Profile />
             case "Dashboard":
-                return <Dashboard />
+                return <Dashboard setStock={handleStock}/>
             default:
                 return <Dashboard />
         }
     }
 
   return (
-      <>
+      <ErrorBoundary>
           {page === "Landing" ? (<Landing onPageChange={handlePageChange}/>) : (<div className={"md:overflow-hidden overflow-x-hidden bg-white dark:bg-black w-[100svw] h-[100svh] no-scrollbar"}>
               <Navbar onShow={handleShow} setStock={handleStock}/>
               <div className={"flex"}>
@@ -68,7 +67,7 @@ function App() {
                   {display(page)}
               </div>
           </div>)}
-      </>
+      </ErrorBoundary>
   );
 }
 

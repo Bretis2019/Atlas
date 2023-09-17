@@ -1,6 +1,6 @@
 import {useEffect, useState} from "react";
 
-export default function Transactions(){
+export default function Transactions(props){
 
     const [transactions, setTransactions] = useState([]);
 
@@ -21,7 +21,7 @@ export default function Transactions(){
 
     const elements = transactions.map(item => {
         return (
-            <div key={item._id} className={"flex justify-between"}>
+            <div key={item._id} className={"flex justify-between cursor-pointer"} onClick={() =>  props.setStock(item.ticker)}>
                 <h1>{item.ticker}</h1>
                 <h1>{item.amount}x</h1>
                 <h1>${item.price}</h1>

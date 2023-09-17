@@ -1,34 +1,50 @@
 import React, {useEffect, useState} from "react";
 import StockChart from "../Markets/StockChart";
 
+
 export default function Favourites(props) {
 
     const [tickerData, setTickerData] = useState([]);
-    const tickersArray = props.array;
+    const [tickersArray, setTickersArray] = useState(props.array || []);
     const [loading, setLoading] = useState(false);
 
-    useEffect(() => {
-        async function fetchQuotesForTickers() {
-            const baseUrl = "https://atlasapi-4oe2.onrender.com/quote?ticker=";
+    async function fetchQuotesForTickers() {
+        const baseUrl = "https://atlasapi-4oe2.onrender.com/quote?ticker=";
 
-            const fetchPromises = tickersArray.map(async ticker => {
-                const url = baseUrl + encodeURIComponent(ticker);
-                const response = await fetch(url);
-                const data = await response.json();
-                return { ...data, symbol: ticker };
-            });
+        const fetchPromises = tickersArray.map(async ticker => {
+            const url = baseUrl + encodeURIComponent(ticker);
+            const response = await fetch(url);
+            const data = await response.json();
+            return { ...data, symbol: ticker };
+        });
 
-            try {
-                setLoading(true);
-                const results = await Promise.all(fetchPromises);
-                setTickerData(results);
-                setLoading(false);
-            } catch (error) {
-                console.error("Error fetching quotes:", error);
-            }
+        try {
+            setLoading(true);
+            const results = await Promise.all(fetchPromises);
+            setTickerData(results);
+            setLoading(false);
+        } catch (error) {
+            console.error("Error fetching quotes:", error);
         }
+    }
 
-        fetchQuotesForTickers();
+    useEffect(() => {
+        if(tickersArray.length === 0){
+            fetch('https://atlasapi-4oe2.onrender.com/user/favorites', {
+                method: 'GET',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': `Bearer ${localStorage.getItem('token')}`
+                }
+            })
+                .then(res => res.json())
+                .then(data => {
+                    setTickersArray(data);
+                })
+        }
+        else{
+            fetchQuotesForTickers();
+        }
     }, [tickersArray]);
 
 
@@ -48,6 +64,14 @@ export default function Favourites(props) {
                     </svg>
                     <span className="sr-only">Loading...</span>
                 </div>
+            </div>
+        )
+    }
+
+    if(tickersArray.length < 1){
+        return(
+            <div className={"text-center text-2xl"}>
+                Favorites not set yet.
             </div>
         )
     }

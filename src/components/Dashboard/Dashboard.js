@@ -5,7 +5,7 @@ import BalanceHistory from "./BalanceHistory";
 
 
 export function commafy( num ) {
-    var str = num.toString().split('.');
+    let str = num.toString().split('.');
     if (str[0].length >= 4) {
         str[0] = str[0].replace(/(\d)(?=(\d{3})+$)/g, '$1,');
     }
@@ -68,7 +68,7 @@ export async function calculateProfitLoss(positions) {
     return { openPositions, totalPositionValue, totalProfitLoss };
 }
 
-export default function Dashboard(){
+export default function Dashboard(props){
 
     const [balance, setBalance] = useState(0);
     const [open, setOpen] = useState([]);
@@ -102,18 +102,6 @@ export default function Dashboard(){
             .then(res => res.json())
             .then(data => {
                 setBalance((data.slice(-1))[0].balance);
-            })
-            .catch(err => console.log(err));
-        fetch('https://atlasapi-4oe2.onrender.com/user/balance', {
-            method: 'GET',
-            headers: {
-                'Content-Type': 'application/json',
-                'Authorization': `Bearer ${localStorage.getItem('token')}`
-            }
-        })
-            .then(res => res.json())
-            .then(data => {
-                console.log(data);
             })
             .catch(err => console.log(err));
     }, []);
@@ -187,7 +175,7 @@ export default function Dashboard(){
                         <h1>Type</h1>
                     </div>
                 </div>
-                <Transactions />
+                <Transactions setStock={props.setStock}/>
             </div>
             <div className={"row-span-5"}>
                 <div className={"flex justify-between flex-col p-2"}>
@@ -199,7 +187,7 @@ export default function Dashboard(){
                         <h1>Amount</h1>
                     </div>
                 </div>
-                <OpenPositions array={openEnhanced}/>
+                <OpenPositions array={openEnhanced} setStock={props.setStock}/>
             </div>
             <div className={"row-span-5 col-span-2 pb-8 md:pb-0"}>
                 <div className={"flex justify-between"}>
