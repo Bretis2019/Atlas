@@ -28,7 +28,6 @@ export default function Landing(props){
     const [haveaccount, setHaveaccount] = useState(true);
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState("");
-    const [success, setSuccess] = useState("");
 
     async function signup(){
         setLoading(true);
@@ -50,12 +49,12 @@ export default function Landing(props){
         fetch("https://atlasapi-4oe2.onrender.com/user/signup", requestOptions)
             .then(response => response.json())
             .then(result => {
+                console.log(result.status);
                 setLoading(false);
-                if(result.status === 200){
-                    setHaveaccount(true);
-                }
-                else{
+                if(result.message !== "User registered successfully"){
                     setError(result.message);
+                }else{
+                    setHaveaccount(true);
                 }
             })
             .catch(error => setError(JSON.stringify(error)));
@@ -85,11 +84,7 @@ export default function Landing(props){
                     localStorage.setItem("token", result.token);
                     props.onPageChange("Dashboard");
                 }else{
-                    if(result.status !== 200){
-                        setError(result.message);
-                    }else{
-                        setSuccess(result.message);
-                    }
+                    setError(result.message);
                 }
                 setLoading(false);
             })
@@ -131,7 +126,6 @@ export default function Landing(props){
                             <button className={"underline"} onClick={() => setHaveaccount(true)}>Login</button>
                         </div>
                         {error !== "" && <div className={"text-2xl text-center text-red-500"}>{error} !</div>}
-                        {success !== "" && <div className={"text-2xl text-center text-green-500"}>{success} !</div>}
                     </div>}
                 </div>
         </div>
