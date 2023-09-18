@@ -8,7 +8,7 @@ export default function News(){
 
     useEffect(()=>{
         function treatNewsData(data){
-            const randomizedNews = [...data.feed];
+            const randomizedNews = [...data];
 
             for (let i = randomizedNews.length - 1; i > 0; i--) {
                 const j = Math.floor(Math.random() * (i + 1));
@@ -20,7 +20,7 @@ export default function News(){
         setLoading(true);
         fetch("https://atlasapi-4oe2.onrender.com/news")
             .then(response => response.json())
-            .then((data) => {
+            .then(data => {
                 treatNewsData(data);
                 setLoading(false);
             }).catch(error => console.log(error));
