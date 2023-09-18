@@ -39,8 +39,8 @@ export default function Profile(){
         })
             .then(res => res.json())
             .then(data => {
-                setFavorites(data);
                 setLoading(false);
+                setFavorites(data);
             })
     }, []);
 
