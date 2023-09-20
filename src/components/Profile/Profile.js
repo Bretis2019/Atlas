@@ -15,6 +15,7 @@ export default function Profile(){
     const [favorites, setFavorites] = useState([]);
     const [input, setInput] = useState("");
     const [elements, setElements] = useState([]);
+    const [open, setOpen] = useState([]);
     const [loading, setLoading] = useState(false);
 
 
@@ -30,7 +31,7 @@ export default function Profile(){
             .then(res => res.json())
             .then(data => {
                 setUsername(data);
-            })
+            }).catch(err => console.log(err));
         fetch('https://atlasapi-4oe2.onrender.com/user/favorites', {
             method: 'GET',
             headers: {
@@ -42,7 +43,19 @@ export default function Profile(){
             .then(data => {
                 setLoading(false);
                 setFavorites(data);
+            }).catch(err => console.log(err));
+        fetch('https://atlasapi-4oe2.onrender.com/user/open', {
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${localStorage.getItem('token')}`
+            }
+        })
+            .then(res => res.json())
+            .then(data => {
+                setOpen(data);
             })
+            .catch(err => console.log(err));
     }, []);
 
     useEffect(() => {
@@ -113,27 +126,27 @@ export default function Profile(){
     }
 
     return (
-        <div className={"dark:bg-black dark:divide-white dark:text-white w-[100svw] md:w-[82svw] md:h-[93svh] grid grid-cols-1 md:grid-cols-2 grid-rows-2 divide-x-2 divide-y-2 divide-black border-r-2 md:border-r-0"}>
-            <div className={"border-t-2 dark:border-white border-black border-l-2 row-span-1"}>
+        <div className={"dark:bg-black dark:divide-white dark:text-white w-[100svw] md:w-[82svw] md:h-[93svh] grid grid-cols-1 md:grid-cols-2 grid-rows-5 divide-x-2 divide-y-2 divide-black border-r-2 md:border-r-0"}>
+            <div className={"border-t-2 dark:border-white border-black border-l-2 row-span-1 md:row-span-2"}>
                 <div className={"flex flex-col"}>
                     <div className={"py-7 px-4 text-5xl border-b-2 border-r-2 dark:border-white border-black"}>Profile</div>
                 </div>
                 <div className={"p-2"}>
-                    <div className={"flex justify-between items-center space-x-2"}>
+                    <div className={"flex justify-between items-center"}>
                         <div className={"text-3xl"}>Username</div>
                         <div className={'text-3xl'}>{username}</div>
                     </div>
                 </div>
             </div>
-            <div className={"border-t-2 dark:border-white border-black border-l-2 row-span-2 flex flex-col"}>
+            <div className={"border-t-2 dark:border-white border-black border-l-2 row-span-3 md:row-span-5 flex flex-col"}>
                 <div className={"flex justify-between flex-col p-2"}>
                     <div className={"py-5 px-2 text-3xl md:text-4xl"}>Portfolio</div>
                 </div>
                 <div className={"flex justify-center items-center h-full"}>
-                    <PieChart />
+                    {open.length > 0 && <PieChart open={open}/>}
                 </div>
             </div>
-            <div className={"row-span-2 p-2 flex flex-col"}>
+            <div className={"row-span-1 md:row-span-3 p-2 flex flex-col"}>
                 <div className={"flex justify-between flex-col p-2"}>
                     <div className={"py-5 px-2 text-3xl md:text-4xl"}>Favorites</div>
                 </div>
