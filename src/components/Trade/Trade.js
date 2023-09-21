@@ -58,7 +58,7 @@ export default function Trade(props){
                 <div className={"flex justify-between p-2"}>
                     <div className={"text-2xl"}>Favourites</div>
                 </div>
-                <Favourites setStock={props.setStock}/>
+                <Favourites setStock={props.setStock} size={"small"}/>
             </div>
             <div className={"border-t-2 dark:border-white border-black border-l-2 row-span-5 p-2"}>
                 <div className={"flex justify-between mb-2 "}>
@@ -70,7 +70,7 @@ export default function Trade(props){
                 <div className={"flex justify-between p-2"}>
                     <div className={"text-2xl"}>Popular</div>
                 </div>
-                <Favourites setStock={props.setStock} array={["AAPL","TSLA","AMZN"]}/>
+                <Favourites setStock={props.setStock} array={["AAPL","TSLA","AMZN"]} size={"small"}/>
             </div>
         </div>
     )

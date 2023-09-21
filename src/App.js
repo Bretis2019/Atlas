@@ -50,7 +50,7 @@ function App() {
             case "Trade":
                 return <Trade setStock={handleStock}/>
             case "Profile":
-                return <Profile />
+                return <Profile setStock={handleStock}/>
             case "Dashboard":
                 return <Dashboard setStock={handleStock}/>
             default:

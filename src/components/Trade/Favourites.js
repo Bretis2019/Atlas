@@ -39,7 +39,11 @@ export default function Favourites(props) {
             })
                 .then(res => res.json())
                 .then(data => {
-                    setTickersArray(data);
+                    if(props.size === "small"){
+                        setTickersArray(data.splice(0,3));
+                    }else{
+                        setTickersArray(data);
+                    }
                 })
         }
         else{

@@ -1,20 +1,11 @@
 import {useEffect, useState} from "react";
 import PieChart from "./PieChart";
+import Favourites from "../Trade/Favourites";
 
-function stringToArray(str) {
-    // Split the string by commas
-    const stockArray = str.split(',');
 
-    // Trim each element to remove leading/trailing spaces
-    return stockArray.map(stock => stock.trim());
-}
-
-export default function Profile(){
+export default function Profile(props){
 
     const [username, setUsername] = useState("");
-    const [favorites, setFavorites] = useState([]);
-    const [input, setInput] = useState("");
-    const [elements, setElements] = useState([]);
     const [open, setOpen] = useState([]);
     const [loading, setLoading] = useState(false);
 
@@ -32,18 +23,6 @@ export default function Profile(){
             .then(data => {
                 setUsername(data);
             }).catch(err => console.log(err));
-        fetch('https://atlasapi-4oe2.onrender.com/user/favorites', {
-            method: 'GET',
-            headers: {
-                'Content-Type': 'application/json',
-                'Authorization': `Bearer ${localStorage.getItem('token')}`
-            }
-        })
-            .then(res => res.json())
-            .then(data => {
-                setLoading(false);
-                setFavorites(data);
-            }).catch(err => console.log(err));
         fetch('https://atlasapi-4oe2.onrender.com/user/open', {
             method: 'GET',
             headers: {
@@ -54,54 +33,11 @@ export default function Profile(){
             .then(res => res.json())
             .then(data => {
                 setOpen(data);
+                setLoading(false);
             })
             .catch(err => console.log(err));
     }, []);
 
-    useEffect(() => {
-        const Elements = favorites.map(item => {
-            return (
-                <div className={"text-xl dark:text-white text-center"} key={item}>
-                    {item}
-                </div>
-            )
-        })
-        setElements(Elements);
-    }, [favorites]);
-
-    function handleClick(){
-        const data = stringToArray(input);
-
-
-        fetch('https://atlasapi-4oe2.onrender.com/user/favorites', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-                'Authorization': `Bearer ${localStorage.getItem('token')}`
-            },
-            body: JSON.stringify({
-                tickers: data
-            })
-        })
-            .then(res => res.json())
-            .then(data => {
-                if(data.token && data.token.trim() !== ""){
-                    localStorage.setItem('token', data.token);
-                    fetch('https://atlasapi-4oe2.onrender.com/user/favorites', {
-                        method: 'GET',
-                        headers: {
-                            'Content-Type': 'application/json',
-                            'Authorization': `Bearer ${localStorage.getItem('token')}`
-                        }
-                    })
-                        .then(res => res.json())
-                        .then(data => {
-                            setFavorites(data);
-                        })
-                }
-            })
-            .catch(err => console.log(err));
-    }
 
     if(loading){
         return (
@@ -127,18 +63,13 @@ export default function Profile(){
 
     return (
         <div className={"dark:bg-black dark:divide-white dark:text-white w-[100svw] md:w-[82svw] md:h-[93svh] grid grid-cols-1 md:grid-cols-2 grid-rows-5 divide-x-2 divide-y-2 divide-black border-r-2 md:border-r-0"}>
-            <div className={"border-t-2 dark:border-white border-black border-l-2 row-span-1 md:row-span-2"}>
-                <div className={"flex flex-col"}>
-                    <div className={"py-7 px-4 text-5xl border-b-2 border-r-2 dark:border-white border-black"}>Profile</div>
-                </div>
-                <div className={"p-2"}>
-                    <div className={"flex justify-between items-center"}>
-                        <div className={"text-3xl"}>Username</div>
-                        <div className={'text-3xl'}>{username}</div>
-                    </div>
+            <div className={"border-2 dark:border-white border-black row-span-1 md:row-span-1"}>
+                <div className={"flex justify-between py-7 px-4"}>
+                    <div className={"text-5xl"}>Profile</div>
+                    <div className={'text-3xl'}>{username}</div>
                 </div>
             </div>
-            <div className={"border-t-2 dark:border-white border-black border-l-2 row-span-3 md:row-span-5 flex flex-col"}>
+            <div className={"border-t-2 dark:border-white border-black border-l-2 row-span-2 md:row-span-5 flex flex-col"}>
                 <div className={"flex justify-between flex-col p-2"}>
                     <div className={"py-5 px-2 text-3xl md:text-4xl"}>Portfolio</div>
                 </div>
@@ -146,16 +77,13 @@ export default function Profile(){
                     {open.length > 0 && <PieChart open={open}/>}
                 </div>
             </div>
-            <div className={"row-span-1 md:row-span-3 p-2 flex flex-col"}>
+            <div className={"row-span-2 md:row-span-4 p-2 flex flex-col"}>
                 <div className={"flex justify-between flex-col p-2"}>
                     <div className={"py-5 px-2 text-3xl md:text-4xl"}>Favorites</div>
                 </div>
-                {favorites.length > 0 ? <div className={"px-8 flex justify-between"}>{elements}</div> :
-                    <div className={"flex flex-col space-y-8 px-4 items-center"}>
-                        <div className={"text-gray-800 dark:text-gray-500 text-center"}>write three stock tickers seperated by commas like AAPL,MSFT,TSLA</div>
-                        <input className={"bg-black dark:bg-white dark:text-black text-white min-w-[20svw] min-h-[5svh] px-4 py-2 rounded-lg"} type="text" name="favorites" placeholder={"Set favorites"} value={input} onChange={event => setInput(event.target.value)}/>
-                        <div onClick={handleClick} className={"bg-blue-600 rounded-lg px-4 py-2 text-white hover:bg-blue-700 cursor-pointer"}>Submit</div>
-                    </div>}
+                <div className={"md:overflow-y-scroll"}>
+                    <Favourites setStock={props.setStock} size={"big"}/>
+                </div>
             </div>
         </div>
     )
