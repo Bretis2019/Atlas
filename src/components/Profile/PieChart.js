@@ -1,5 +1,10 @@
 import Chart from "react-apexcharts";
 
+
+function isBigScreen() {
+    return window.innerWidth >= 768;
+}
+
 const isDarkMode = () =>
     window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
 
@@ -32,7 +37,7 @@ export default function PieChart(props){
 
     return (
         <div className={"py-8 px-4"}>
-            <Chart options={chartOptions} series={values} type="pie" width="450" />
+            <Chart options={chartOptions} series={values} type="pie" width={isBigScreen() ? "500" : "400"} />
         </div>
     )
 }

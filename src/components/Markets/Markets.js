@@ -93,13 +93,13 @@ export default function Markets(props){
                 </div>
                 <Insight setStock={props.setStock}/>
             </div>
-            <div className={" row-span-5 p-2"}>
+            <div className={"row-span-5 p-2"}>
                 <div className={"flex justify-between mb-2"}>
                     <div className={"text-4xl"}>Most traded</div>
                 </div>
                 <Traded setStock={props.setStock}/>
             </div>
-            <div className={" row-span-5"}>
+            <div className={"row-span-5"}>
                 <div className="flex flex-col">
                     <div className={"py-6 px-4 text-4xl border-b-2 border-black dark:border-white"}>Learn</div>
                     <a href={"https://www.investopedia.com/terms/s/spottrade.asp"}>
