@@ -46,9 +46,9 @@ function App() {
             case "Order":
                 return <Order ticker={stock}/>
             case "Markets":
-                return <Markets setStock={handleStock} onPageChange={handlePageChange}/>;
+                return <Markets setStock={handleStock}/>;
             case "Trade":
-                return <Trade setStock={handleStock}/>
+                return <Trade setStock={handleStock} onPageChange={handlePageChange}/>
             case "Profile":
                 return <Profile setStock={handleStock}/>
             case "Dashboard":

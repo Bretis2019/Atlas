@@ -49,7 +49,6 @@ export default function Landing(props){
         fetch("https://atlasapi-4oe2.onrender.com/user/signup", requestOptions)
             .then(response => response.json())
             .then(result => {
-                console.log(result.status);
                 setLoading(false);
                 if(result.message !== "User registered successfully"){
                     setError(result.message);

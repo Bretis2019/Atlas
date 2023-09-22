@@ -57,6 +57,7 @@ export default function Trade(props){
             <div className={"border-t-2 dark:border-white border-black border-l-2 row-span-3"}>
                 <div className={"flex justify-between p-2"}>
                     <div className={"text-2xl"}>Favourites</div>
+                    <div onClick={() => props.onPageChange("Profile")} className={"cursor-pointer rounded-full border-2 dark:border-white dark:md:hover:bg-gray-900 border-black px-2 py-2 md:hover:bg-gray-200"}>See all</div>
                 </div>
                 <Favourites setStock={props.setStock} size={"small"}/>
             </div>
