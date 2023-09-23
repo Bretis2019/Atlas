@@ -20,6 +20,7 @@ export default function LineGraph(props){
 
     const options = {
         chart: {
+            fontFamily: 'Space Mono',
             id: 'line-chart',
             theme: 'dark',
             toolbar: {

@@ -10,6 +10,7 @@ export default function SemiCircleGauge(props) {
     const chartOptions = {
         series: [percentage],
         chart: {
+            fontFamily: 'Space Mono',
             type: 'radialBar',
             sparkline: {
                 enabled: true

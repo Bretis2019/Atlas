@@ -12,13 +12,14 @@ export default function PieChart(props){
 
     const {open} = props;
     const labels = open.map(item => item.ticker);
-    const values = open.map(item => item.amount * item.averagePrice);
+    const values = open.map(item => item.amount * item.averagePrice.toFixed(0));
 
     const chartOptions = {
         labels,
         series: values,
         options: {
             chart: {
+                fontFamily: 'Space Mono',
                 type: 'pie',
             },
             responsive: [{
@@ -26,6 +27,7 @@ export default function PieChart(props){
             }]
         },
         legend: {
+            fontFamily: 'Space Mono',
             position: 'bottom',
             labels: {
                 colors: isDarkMode() ? '#ffffff': '#000000',

@@ -30,6 +30,7 @@ export default function StockChart(props) {
 
     const options = {
         chart: {
+            fontFamily: 'Space Mono',
             id: 'stock-chart',
             type: 'line',
             toolbar: {

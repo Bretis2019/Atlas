@@ -105,6 +105,7 @@ export default function CandleStock(props){
 
     const options = {
         chart: {
+            fontFamily: 'Space Mono',
             type: 'candlestick',
             height: 350,
             theme: 'dark',

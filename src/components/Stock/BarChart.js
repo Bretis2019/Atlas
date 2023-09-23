@@ -7,6 +7,7 @@ export default function BarChart(props){
     const chartData = {
         options: {
             chart: {
+                fontFamily: 'Space Mono',
                 id: 'bar-chart',
                 theme: isDarkMode() ?  'dark' : 'light',
                 toolbar: {
