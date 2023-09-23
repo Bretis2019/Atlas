@@ -10,7 +10,7 @@ export default function Traded(props){
         fetch(`https://atlasapi-4oe2.onrender.com/active`)
             .then(response => response.json())
             .then(data => {
-                setArray(data);
+                setArray(data.filter(item => /^[a-zA-Z]+$/.test(item.symbol)));
                 setLoading(false);
             })
             .catch(error => {
