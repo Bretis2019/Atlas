@@ -148,7 +148,7 @@ export default function CandleStock(props){
     if(series.length === 0){
         return (
             <div className={"h-[365px] flex items-center justify-center"}>
-                <h1 className={"text-4xl text-black dark:text-white"}>The markets were closed</h1>
+                <h1 className={"text-4xl text-black dark:text-white text-center"}>The markets were closed</h1>
             </div>
         )
     }
