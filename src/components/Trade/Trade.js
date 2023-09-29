@@ -5,6 +5,7 @@ import {useEffect, useState} from "react";
 export default function Trade(props){
 
     const [news, setNews] = useState([]);
+    const [wsb, setWsb] = useState([]);
     const [loading, setLoading] = useState(false);
 
     useEffect(()=>{
@@ -23,6 +24,11 @@ export default function Trade(props){
             .then(response => response.json())
             .then(data => {
                 treatNewsData(data);
+            }).catch(error => console.log(error));
+        fetch("https://atlasapi-4oe2.onrender.com/popular")
+            .then(response => response.json())
+            .then(data => {
+                setWsb(data);
                 setLoading(false);
             }).catch(error => console.log(error));
     },[]);
@@ -69,9 +75,9 @@ export default function Trade(props){
             </div>
             <div className={"border-t-2 dark:border-white border-black border-l-2 row-span-3"}>
                 <div className={"flex justify-between p-2"}>
-                    <div className={"text-2xl"}>Popular</div>
+                    <div className={"text-2xl"}>WSB picks</div>
                 </div>
-                <Favourites setStock={props.setStock} array={["AAPL","TSLA","AMZN"]} size={"small"}/>
+                <Favourites setStock={props.setStock} array={wsb} size={"small"}/>
             </div>
         </div>
     )
