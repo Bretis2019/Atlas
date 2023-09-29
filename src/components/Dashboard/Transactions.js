@@ -1,6 +1,7 @@
 import {useEffect, useState} from "react";
+import {Link} from "react-router-dom";
 
-export default function Transactions(props){
+export default function Transactions(){
 
     const [transactions, setTransactions] = useState([]);
 
@@ -21,12 +22,14 @@ export default function Transactions(props){
 
     const elements = transactions.map(item => {
         return (
-            <div key={item._id} className={"flex justify-between cursor-pointer"} onClick={() =>  props.setStock(item.ticker)}>
-                <h1>{item.ticker}</h1>
-                <h1>{item.amount}x</h1>
-                <h1>${item.price}</h1>
-                <h1>{item.type}</h1>
-            </div>
+            <Link to={`/Atlas/stock/${item.ticker}`}>
+                <div key={item._id} className={"flex justify-between cursor-pointer"}>
+                    <h1>{item.ticker}</h1>
+                    <h1>{item.amount}x</h1>
+                    <h1>${item.price}</h1>
+                    <h1>{item.type}</h1>
+                </div>
+            </Link>
         )
     })
 

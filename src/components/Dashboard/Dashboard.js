@@ -68,7 +68,7 @@ export async function calculateProfitLoss(positions) {
     return { openPositions, totalPositionValue, totalProfitLoss };
 }
 
-export default function Dashboard(props){
+export default function Dashboard(){
 
     const [balance, setBalance] = useState(0);
     const [balanceHistory, setBalanceHistory] = useState([]);
@@ -177,7 +177,7 @@ export default function Dashboard(props){
                         <h1>Type</h1>
                     </div>
                 </div>
-                <Transactions setStock={props.setStock}/>
+                <Transactions />
             </div>
             <div className={"row-span-5"}>
                 <div className={"flex justify-between flex-col p-2"}>
@@ -189,7 +189,7 @@ export default function Dashboard(props){
                         <h1>Amount</h1>
                     </div>
                 </div>
-                <OpenPositions array={openEnhanced} setStock={props.setStock}/>
+                <OpenPositions array={openEnhanced}/>
             </div>
             <div className={"row-span-5 col-span-2 pb-8 md:pb-0"}>
                 <div className={"flex justify-between"}>

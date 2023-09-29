@@ -1,4 +1,5 @@
 import {useEffect, useState} from "react";
+import {Link} from "react-router-dom";
 
 export default function Searchbar(props){
     const {size} = props;
@@ -28,21 +29,41 @@ export default function Searchbar(props){
     },[query]);
 
     function handleClick(ticker){
-        props.setStock(ticker);
-        setQuery("");
+        if(typeof props.setStock === 'function'){
+            props.setStock(ticker);
+            setQuery("");
+        }else{
+            setQuery("");
+        }
     }
 
     useEffect(()=>{
-        const Elements = suggestions.slice(0,3).map(item =>{
-            return (
-                <div onClick={() =>  handleClick(item.ticker)} className={"flex justify-between py-2 px-4 md:hover:bg-gray-200 dark:md:hover:bg-gray-800 cursor-pointer"}>
-                    <div className={"text-xl md:text-2xl"}>{item.long}</div>
-                    <div className={"text-xl md:text-2xl"}>{item.ticker}</div>
-                </div>
-            )
-        });
-        setCards(Elements);
+        if(typeof props.setStock === 'function'){
+
+            const Elements = suggestions.slice(0,3).map(item =>{
+                return (
+                    <div onClick={() =>  handleClick(item.ticker)} className={"flex justify-between py-2 px-4 md:hover:bg-gray-200 dark:md:hover:bg-gray-800 cursor-pointer"}>
+                        <div className={"text-xl md:text-2xl"}>{item.long}</div>
+                        <div className={"text-xl md:text-2xl"}>{item.ticker}</div>
+                    </div>
+                )
+            });
+            setCards(Elements);
+        }else{
+            const Elements = suggestions.slice(0,3).map(item =>{
+                return (
+                    <Link to={`/Atlas/stock/${item.ticker}`}>
+                        <div onClick={() =>  handleClick()} className={"flex justify-between py-2 px-4 md:hover:bg-gray-200 dark:md:hover:bg-gray-800 cursor-pointer"}>
+                            <div className={"text-xl md:text-2xl"}>{item.long}</div>
+                            <div className={"text-xl md:text-2xl"}>{item.ticker}</div>
+                        </div>
+                    </Link>
+                )
+            });
+            setCards(Elements);
+        }
     },[suggestions]);
+
     return(
         <>
             <div className={"relative"}>
@@ -54,7 +75,7 @@ export default function Searchbar(props){
                     placeholder={"Search for stocks"}
                 />
                 {(query.length > 0 && suggestions.length > 0 && !loading) &&(
-                    <div className={`absolute mt-1 w-full left-0 ${size === "mini" ? "md:w-[26svw]": "md:w-[75svw]"} z-50 text-4xl text-black dark:text-white bg-white dark:bg-black border-2 border-black dark:border-white divide-y-2 divide-black dark:divide-white`}>
+                    <div className={`flex flex-col absolute mt-1 w-full left-0 ${size === "mini" ? "md:w-[26svw]": "md:w-[75svw]"} z-50 text-4xl text-black dark:text-white bg-white dark:bg-black border-2 border-black dark:border-white divide-y-2 divide-black dark:divide-white`}>
                         {cards}
                     </div>
                 )}

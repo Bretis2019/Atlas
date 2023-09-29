@@ -1,5 +1,6 @@
 import React, {useEffect, useState} from "react";
 import StockChart from "../Markets/StockChart";
+import {Link} from "react-router-dom";
 
 
 export default function Favourites(props) {
@@ -82,27 +83,29 @@ export default function Favourites(props) {
 
     const Elements = tickerData.map((item) => {
         return (
-            <div onClick={() =>  props.setStock(item.symbol)} className={"flex justify-between items-center cursor-pointer"} key={item.symbol}>
-                <div>
-                    <h1 className={"text-3xl"}>{item.symbol}</h1>
-                    <h1 className={"text-gray-500"}>{item.name}</h1>
+            <Link to={`/Atlas/stock/${item.symbol}`}>
+                <div className={"flex justify-between items-center cursor-pointer"} key={item.symbol}>
+                    <div>
+                        <h1 className={"text-3xl"}>{item.symbol}</h1>
+                        <h1 className={"text-gray-500"}>{item.name}</h1>
+                    </div>
+                    <div>
+                        <StockChart name={item.symbol}/>
+                    </div>
+                    <div className={"w-[20svw] md:w-[7svw] text-end"}>
+                        <h1
+                            className={`md:text-3xl text-${
+                                item.change < 0 ? "red-700" : "green-700"
+                            }`}
+                        >
+                            {Math.round(item.change * 100) / 100}%
+                        </h1>
+                        <h1 className={"text-gray-500 text-end"}>${item.price}</h1>
+                    </div>
                 </div>
-                <div>
-                    <StockChart name={item.symbol}/>
-                </div>
-                <div className={"w-[20svw] md:w-[7svw] text-end"}>
-                    <h1
-                        className={`md:text-3xl text-${
-                            item.change < 0 ? "red-700" : "green-700"
-                        }`}
-                    >
-                        {Math.round(item.change * 100) / 100}%
-                    </h1>
-                    <h1 className={"text-gray-500 text-end"}>${item.price}</h1>
-                </div>
-            </div>
+            </Link>
         );
     });
 
-    return <div className={"p-4 space-y-8"}>{Elements}</div>;
+    return <div className={"flex flex-col p-4 space-y-8"}>{Elements}</div>;
 }

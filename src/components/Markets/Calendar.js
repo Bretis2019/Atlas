@@ -1,3 +1,5 @@
+import {Link} from "react-router-dom";
+
 export default function Calendar(props){
     const Elements = props.calendar.map(item => {
         // Check if item.estimate is not empty or zero
@@ -7,24 +9,26 @@ export default function Calendar(props){
         const textColor = item.estimate > 0 ? 'text-green-700' : 'text-red-700';
 
         return (
-            <div onClick={() => props.setStock(item.symbol)} className={"flex justify-between my-4 cursor-pointer"}>
-                <div className="text-xl">{item.symbol}</div>
+            <Link to={`Atlas/stock/${item.symbol}`}>
+                <div className={"flex justify-between my-4 cursor-pointer"}>
+                    <div className="text-xl">{item.symbol}</div>
 
-                {/* Conditional rendering for estimate */}
-                <div className={"text-xl"}>
-                    {hasEstimate ? (
-                        <div className={`text-xl ${textColor}`}>
-                            ${item.estimate}
-                        </div>
-                    ) : (
-                        <div className="text-xl">
-                            {item.estimate}
-                        </div>
-                    )}
+                    {/* Conditional rendering for estimate */}
+                    <div className={"text-xl"}>
+                        {hasEstimate ? (
+                            <div className={`text-xl ${textColor}`}>
+                                ${item.estimate}
+                            </div>
+                        ) : (
+                            <div className="text-xl">
+                                {item.estimate}
+                            </div>
+                        )}
+                    </div>
+
+                    <div className={"text-xl "}>{item.reportDate}</div>
                 </div>
-
-                <div className={"text-xl "}>{item.reportDate}</div>
-            </div>
+            </Link>
         );
     });
 

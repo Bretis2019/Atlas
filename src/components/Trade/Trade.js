@@ -1,8 +1,9 @@
 import Favourites from "./Favourites";
 import News from "./News";
 import {useEffect, useState} from "react";
+import {Link} from "react-router-dom";
 
-export default function Trade(props){
+export default function Trade(){
 
     const [news, setNews] = useState([]);
     const [wsb, setWsb] = useState([]);
@@ -63,9 +64,11 @@ export default function Trade(props){
             <div className={"border-t-2 dark:border-white border-black border-l-2 row-span-3"}>
                 <div className={"flex justify-between p-2"}>
                     <div className={"text-2xl"}>Favourites</div>
-                    <div onClick={() => props.onPageChange("Profile")} className={"cursor-pointer rounded-full border-2 dark:border-white dark:md:hover:bg-gray-900 border-black px-2 py-2 md:hover:bg-gray-200"}>See all</div>
+                    <Link to={"/Atlas/profile"}>
+                        <div  className={"cursor-pointer rounded-full border-2 dark:border-white dark:md:hover:bg-gray-900 border-black px-2 py-2 md:hover:bg-gray-200"}>See all</div>
+                    </Link>
                 </div>
-                <Favourites setStock={props.setStock} size={"small"}/>
+                <Favourites size={"small"}/>
             </div>
             <div className={"border-t-2 dark:border-white border-black border-l-2 row-span-5 p-2"}>
                 <div className={"flex justify-between mb-2 "}>
@@ -77,7 +80,7 @@ export default function Trade(props){
                 <div className={"flex justify-between p-2"}>
                     <div className={"text-2xl"}>WSB picks</div>
                 </div>
-                <Favourites setStock={props.setStock} array={wsb} size={"small"}/>
+                <Favourites array={wsb} size={"small"}/>
             </div>
         </div>
     )

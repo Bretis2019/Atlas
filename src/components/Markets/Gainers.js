@@ -1,7 +1,8 @@
 import StockChart from "./StockChart";
 import {useEffect, useState} from "react";
+import {Link} from "react-router-dom";
 
-export default function Gainers(props){
+export default function Gainers(){
     const [array, setArray] = useState([]);
     const [loading, setLoading] = useState(false);
     useEffect(()=>{
@@ -21,14 +22,16 @@ export default function Gainers(props){
         const formattedPrice = parseFloat(item.price).toFixed(2);
         const formattedPercentage = parseFloat(item.change).toFixed(2);
         return(
-            <div key={item.symbol} onClick={() =>  props.setStock(item.symbol)} className={"flex items-center justify-between space-y-4 cursor-pointer"}>
-                <div className={"text-xl font-bold"}>{item.symbol}</div>
-                <div><StockChart name={item.symbol}/></div>
-                <div className={"flex flex-col text-end"}>
-                    <div className={"text-green-700 text-xl"}>{formattedPercentage}%</div>
-                    <div>${formattedPrice}</div>
+            <Link to={`/Atlas/stock/${item.symbol}`}>
+                <div key={item.symbol} className={"flex items-center justify-between space-y-4 cursor-pointer"}>
+                    <div className={"text-xl font-bold"}>{item.symbol}</div>
+                    <div><StockChart name={item.symbol}/></div>
+                    <div className={"flex flex-col text-end"}>
+                        <div className={"text-green-700 text-xl"}>{formattedPercentage}%</div>
+                        <div>${formattedPrice}</div>
+                    </div>
                 </div>
-            </div>
+            </Link>
         )
     })
 

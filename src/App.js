@@ -1,5 +1,5 @@
 import './App.css';
-import {useState} from "react";
+import {useEffect, useState} from "react";
 import Markets from "./components/Markets/Markets";
 import Navbar from "./components/Navbar";
 import Sidebar from "./components/Sidebar";
@@ -10,27 +10,8 @@ import Order from "./components/Order/Order";
 import Landing from "./components/Landing/Landing";
 import Profile from "./components/Profile/Profile";
 import ErrorBoundary from "./ErrorBoundary";
+import {Route, Routes, useLocation} from "react-router-dom";
 function App() {
-
-    const[stock, setStock] = useState("");
-    const [page, setPage] = useState(localStorage.getItem("token") && localStorage.getItem("token").trim() !== "" ? "Markets" : "Landing");
-
-    const handlePageChange = (newPage) => {
-        setPage(newPage);
-        if(newPage !== "Order"){
-            setStock("");
-        }
-        if(show){handleShow();}
-    };
-
-    const handleStock = (ticker) => {
-        setStock(ticker);
-        if(ticker === ""){
-            setPage("Markets");
-        }else{
-            setPage("");
-        }
-    }
 
     const [show, setShow] = useState(false);
 
@@ -38,33 +19,27 @@ function App() {
         setShow(prevState => !prevState);
     };
 
-    function display(page){
-        if(stock !== "" && page !== "Order"){
-            return <Stock ticker={stock} setStock={handleStock} onPageChange={handlePageChange}/>
-        }
-        switch(page){
-            case "Order":
-                return <Order ticker={stock}/>
-            case "Markets":
-                return <Markets setStock={handleStock}/>;
-            case "Trade":
-                return <Trade setStock={handleStock} onPageChange={handlePageChange}/>
-            case "Profile":
-                return <Profile setStock={handleStock}/>
-            case "Dashboard":
-                return <Dashboard setStock={handleStock}/>
-            default:
-                return <Dashboard />
-        }
-    }
+    const location = useLocation();
+    const [page, setPage] = useState(location.pathname);
+    useEffect(() => {
+        setPage(location.pathname)
+    }, [location]);
 
   return (
       <ErrorBoundary>
-          {page === "Landing" ? (<Landing onPageChange={handlePageChange}/>) : (<div className={"md:overflow-hidden overflow-x-hidden bg-white dark:bg-black w-[100svw] h-[100svh] no-scrollbar"}>
-              <Navbar onShow={handleShow} setStock={handleStock}/>
+          {localStorage.getItem("token") === "" || page === "/Atlas/landing" ?  (<Landing/>) : (<div className={"md:overflow-hidden overflow-x-hidden bg-white dark:bg-black w-[100svw] h-[100svh] no-scrollbar"}>
+              <Navbar onShow={handleShow}/>
               <div className={"flex"}>
-                  <Sidebar onPageChange={handlePageChange} page={page} show={show}/>
-                  {display(page)}
+                  <Sidebar show={show}/>
+                  <Routes>
+                      <Route path="/Atlas/" element={<Markets/>} />
+                      <Route path="/Atlas/markets" element={<Markets/>} />
+                      <Route path="/Atlas/trade" element={<Trade/>} />
+                      <Route path="/Atlas/profile" element={<Profile/>} />
+                      <Route path="/Atlas/dashboard" element={<Dashboard/>} />
+                      <Route path="/Atlas/order/:ticker" element={<Order/>} />
+                      <Route path="/Atlas/stock/:ticker" element={<Stock/>} />
+                  </Routes>
               </div>
           </div>)}
       </ErrorBoundary>

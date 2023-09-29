@@ -3,7 +3,7 @@ import PieChart from "./PieChart";
 import Favourites from "../Trade/Favourites";
 
 
-export default function Profile(props){
+export default function Profile(){
 
     const [username, setUsername] = useState("");
     const [open, setOpen] = useState([]);
@@ -82,7 +82,7 @@ export default function Profile(props){
                     <div className={"py-5 px-2 text-3xl md:text-4xl"}>Favorites</div>
                 </div>
                 <div className={"md:overflow-y-scroll"}>
-                    <Favourites setStock={props.setStock} size={"big"}/>
+                    <Favourites size={"big"}/>
                 </div>
             </div>
         </div>

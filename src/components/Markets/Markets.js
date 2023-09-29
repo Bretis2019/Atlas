@@ -4,7 +4,7 @@ import Traded from "./Traded";
 import {useEffect, useState} from "react";
 import Insight from "./Insight";
 
-export default function Markets(props){
+export default function Markets(){
     const [sp, setSp] = useState([0,0]);
     const [dji, setDji] = useState([0,0]);
     const [loading, setLoading] = useState(false);
@@ -79,25 +79,25 @@ export default function Markets(props){
                 <div className={"flex justify-between"}>
                     <div className={"text-2xl"}>Top Gainers</div>
                 </div>
-                <Gainers setStock={props.setStock}/>
+                <Gainers/>
             </div>
             <div className={"row-span-3 p-2"}>
                 <div className={"flex justify-between"}>
                     <div className={"text-2xl"}>Top Losers</div>
                 </div>
-                <Losers setStock={props.setStock}/>
+                <Losers/>
             </div>
             <div className={"row-span-5"}>
                 <div className={"flex justify-between mb-2  p-2"}>
                     <div className={"text-4xl"}>Insight</div>
                 </div>
-                <Insight setStock={props.setStock}/>
+                <Insight/>
             </div>
             <div className={"row-span-5 p-2"}>
                 <div className={"flex justify-between mb-2"}>
                     <div className={"text-4xl"}>Most traded</div>
                 </div>
-                <Traded setStock={props.setStock}/>
+                <Traded/>
             </div>
             <div className={"row-span-5"}>
                 <div className="flex flex-col">

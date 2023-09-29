@@ -1,9 +1,10 @@
 import {useEffect, useState} from "react";
 import OpenPositions from "../Dashboard/OpenPositions";
 import {calculateProfitLoss, commafy} from "../Dashboard/Dashboard";
+import {useParams} from "react-router-dom";
 
-export default function Order(props){
-    const {ticker} = props;
+export default function Order(){
+    const {ticker} = useParams();
     const [price, setPrice] = useState(0);
     const [count, setCount] = useState(1);
     const [loading, setLoading] = useState(false);

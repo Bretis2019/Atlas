@@ -3,6 +3,7 @@ import MiniCard from "./MiniCard";
 import CandleStock from "./CandleStock";
 import BarChart from "./BarChart";
 import "./StockDescription.css"
+import {Link, useParams} from "react-router-dom";
 function roundToFirstNonZeroDecimal(number) {
     const strNumber = number.toString();
     const decimalIndex = strNumber.indexOf('.');
@@ -45,8 +46,8 @@ function convertDateFormat(dateString) {
     return `${year}-${month}-${day}`;
 }
 
-export default function Stock(props){
-    const {ticker} = props;
+export default function Stock(){
+    const {ticker} = useParams();
 
     const [description, setDescription] = useState({
         logo: "",
@@ -103,7 +104,7 @@ export default function Stock(props){
 
     useEffect(() => {
         const cardElements = recommendations.map(item => {
-            return (<MiniCard ticker={item.symbol} key={item.symbol} setStock={props.setStock}/>);
+            return (<MiniCard ticker={item.symbol} key={item.symbol}/>);
         });
         setCards(cardElements);
     }, [recommendations]);
@@ -159,7 +160,9 @@ export default function Stock(props){
             <div className={"dark:bg-black dark:divide-white dark:text-white w-[100svw] md:w-[82svw] h-[93vh] border-2 flex justify-center items-center"}>
                 <div className="flex flex-col items-center space-y-4">
                     <h1 className={"text-3xl md:text-5xl text-center"}>Sorry we don't have that ticker yet</h1>
-                    <button onClick={() => props.setStock("")} className={"cursor-pointer rounded-full border-2 dark:border-white dark:md:hover:bg-gray-900 border-black px-2 py-2 md:hover:bg-gray-200"}>Reset</button>
+                    <Link to={"/Atlas/"}>
+                        <button className={"cursor-pointer rounded-full border-2 dark:border-white dark:md:hover:bg-gray-900 border-black px-2 py-2 md:hover:bg-gray-200"}>Reset</button>
+                    </Link>
                 </div>
             </div>
         )
@@ -176,19 +179,21 @@ export default function Stock(props){
                     }
                 </div>
                 <div className={""}>
-                    <div onClick={() => props.onPageChange("Order")} className={"cursor-pointer pb-7 px-4 flex justify-between items-center space-x-4"}>
-                        <div className="flex items-center">
-                            <img className={"h-[50px] w-[50px] object-contain rounded-lg"} src={getFirstWord(description.name) === "Meta" ? "https://logo.clearbit.com/https://www.meta.com" : description.logo} alt={description.name + "logo"} loading="lazy"/>
-                            <div className={`px-2 ${getFirstWord(description.name).length > 10 ? "text-2xl" : "text-3xl"} md:text-4xl`}>{getFirstWord(description.name)}</div>
-                        </div>
-                        <div className={"flex max-md:flex-col space-x-4 max-md:space-y-4 items-center"}>
-                            <div className={"text-white bg-gradient-to-r from-green-400 to-blue-500 align-text-top text-center rounded-lg pb-1 px-1"}>
-                                Buy/Sell
-                                <div className={"text-2xl bg-black rounded-full px-2"}>${description.price.toFixed(2)}</div>
+                    <Link to={`/Atlas/order/${ticker}`}>
+                        <div className={"cursor-pointer pb-7 px-4 flex justify-between items-center space-x-4"}>
+                            <div className="flex items-center">
+                                <img className={"h-[50px] w-[50px] object-contain rounded-lg"} src={getFirstWord(description.name) === "Meta" ? "https://logo.clearbit.com/https://www.meta.com" : description.logo} alt={description.name + "logo"} loading="lazy"/>
+                                <div className={`px-2 ${getFirstWord(description.name).length > 10 ? "text-2xl" : "text-3xl"} md:text-4xl`}>{getFirstWord(description.name)}</div>
                             </div>
-                            <div className={`text-2xl text-${description.change < 0 ? "red-700" : "green-700"}`}>{roundToFirstNonZeroDecimal(description.change * 100)}%</div>
+                            <div className={"flex max-md:flex-col space-x-4 max-md:space-y-4 items-center"}>
+                                <div className={"text-white bg-gradient-to-r from-green-400 to-blue-500 align-text-top text-center rounded-lg pb-1 px-1"}>
+                                    Buy/Sell
+                                    <div className={"text-2xl bg-black rounded-full px-2"}>${description.price.toFixed(2)}</div>
+                                </div>
+                                <div className={`text-2xl text-${description.change < 0 ? "red-700" : "green-700"}`}>{roundToFirstNonZeroDecimal(description.change * 100)}%</div>
+                            </div>
                         </div>
-                    </div>
+                    </Link>
                     <div className={"py-2 space-y-4 px-2  border-t-2 dark:border-white border-black space-x-4 flex flex-col overflow-hidden max-h-[330px] md:max-h-[235px]"}>
                         <div className="flex justify-between">
                             <div className="text-4xl px-2">Description</div>

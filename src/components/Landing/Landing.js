@@ -19,7 +19,7 @@ function Spinner (){
     )
 }
 
-export default function Landing(props){
+export default function Landing(){
 
     const [registerUsername, setRegisterUsername] = useState("");
     const [registerPassword, setRegisterPassword] = useState("");
@@ -81,7 +81,7 @@ export default function Landing(props){
             .then(result => {
                 if(typeof(result.token) === "string") {
                     localStorage.setItem("token", result.token);
-                    props.onPageChange("Dashboard");
+                    window.location.href = '/Atlas/';
                 }else{
                     setError(result.message);
                 }
