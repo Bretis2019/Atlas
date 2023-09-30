@@ -3,6 +3,7 @@ import Losers from "./Losers";
 import Traded from "./Traded";
 import {useEffect, useState} from "react";
 import Insight from "./Insight";
+import {Link} from "react-router-dom";
 
 export default function Markets(){
     const [sp, setSp] = useState([0,0]);
@@ -34,7 +35,7 @@ export default function Markets(){
 
     if(loading){
         return (
-            <div className={"flex items-center justify-center dark:bg-black dark:divide-white dark:text-white w-[100svw] md:w-[82svw] h-[93svh] border-x-2 md:border-r-0"}>
+            <div className={"flex items-center justify-center dark:bg-black dark:divide-white dark:text-white w-[100svw] md:w-[82svw] h-[93svh] border-2"}>
                 <div className="text-center">
                     <div role="status">
                         <svg aria-hidden="true"
@@ -59,20 +60,24 @@ export default function Markets(){
             <div className={"border-t-2 dark:border-white border-black border-l-2 row-span-3"}>
                 <div className={"flex flex-col"}>
                     <div className={"py-7 px-4 text-5xl border-b-2 dark:border-white border-black"}>Markets</div>
-                    <div className={"p-2 border-b-2 border-black dark:border-white"}>
-                        <div className={"flex items-center space-x-2"}>
-                            <div className={"text-2xl"}>S&P 500</div>
-                            <div className={`text-${sp[0] < 0 ? 'red-700' : 'green-700'}`}>{sp[0].toFixed(2)}%</div>
+                    <Link to={"/Atlas/order/spy"}>
+                        <div className={"p-2 border-b-2 border-black dark:border-white cursor-pointer"}>
+                            <div className={"flex items-center space-x-2"}>
+                                <div className={"text-2xl"}>S&P 500</div>
+                                <div className={`text-${sp[0] < 0 ? 'red-700' : 'green-700'}`}>{sp[0].toFixed(2)}%</div>
+                            </div>
+                            <div className={"text-4xl"}>${Number(sp[1]).toFixed(2)}</div>
                         </div>
-                        <div className={"text-4xl"}>${Number(sp[1]).toFixed(2)}</div>
-                    </div>
-                    <div className={"p-2"}>
-                        <div className={"flex items-center space-x-2"}>
-                            <div className={"text-2xl"}>Dow Jones</div>
-                            <div className={`text-${dji[0] < 0 ? 'red-700' : 'green-700'}`}>{dji[0].toFixed(2)}%</div>
+                    </Link>
+                    <Link to={"/Atlas/order/dji"}>
+                        <div className={"p-2 cursor-pointer"}>
+                            <div className={"flex items-center space-x-2"}>
+                                <div className={"text-2xl"}>Dow Jones</div>
+                                <div className={`text-${dji[0] < 0 ? 'red-700' : 'green-700'}`}>{dji[0].toFixed(2)}%</div>
+                            </div>
+                            <div className={"text-4xl"}>${Number(dji[1]).toFixed(2)}</div>
                         </div>
-                        <div className={"text-4xl"}>${Number(dji[1]).toFixed(2)}</div>
-                    </div>
+                    </Link>
                 </div>
             </div>
             <div className={"row-span-3 p-2"}>

@@ -6,6 +6,9 @@ export default function Sidebar(props){
     const [page, setPage] = useState(location.pathname);
     useEffect(() => {
         setPage(location.pathname)
+        if(show){
+            props.onPageChage();
+        }
     }, [location]);
     const {show} = props;
 

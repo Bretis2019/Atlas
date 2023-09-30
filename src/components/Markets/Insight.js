@@ -1,7 +1,8 @@
 import Searchbar from "../Searchbar";
 import {useEffect, useState} from "react";
+import {Link} from "react-router-dom";
 
-export default function Insight(props){
+export default function Insight(){
 
     const [ticker,setTicker] = useState("TSLA");
     const [data, setData] = useState({
@@ -66,14 +67,16 @@ export default function Insight(props){
             <div className={"border-y-2 border-black dark:border-white"}>
                 <Searchbar size={"mini"} setStock={handleClick}/>
             </div>
-            <div onClick={() =>  props.setStock(ticker)} className="flex flex-col justify-center text-center pt-8">
-                <div className={"text-xl"}>{ticker}</div>
-                <div className={"text-8xl pt-2 pb-8"}>{data.rating}</div>
-                <div className="flex flex-col space-y-2 space-x-4 text-xl text-center">
-                    <div>Target: ${data.target}</div>
-                    <div>Stop loss: ${data.stoploss.toFixed(2)}</div>
+            <Link to={`/Atlas/stock/${ticker}`}>
+                <div className="flex flex-col justify-center text-center pt-8">
+                    <div className={"text-xl"}>{ticker}</div>
+                    <div className={"text-8xl pt-2 pb-8"}>{data.rating}</div>
+                    <div className="flex flex-col space-y-2 space-x-4 text-xl text-center">
+                        <div>Target: ${data.target}</div>
+                        <div>Stop loss: ${data.stoploss.toFixed(2)}</div>
+                    </div>
                 </div>
-            </div>
+            </Link>
         </div>
     )
 }

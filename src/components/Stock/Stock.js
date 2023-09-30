@@ -220,7 +220,7 @@ export default function Stock(){
                 <div className={"px-4 py-2"}>
                     <div className="flex justify-between items-center">
                         <div className="text-4xl">Earnings</div>
-                        <div className={"text-xl"}>{convertDateFormat(description.earnings_date[0])}</div>
+                        {convertDateFormat(description.earnings_date[0]) !== "NaN-NaN-NaN" && <div className={"text-xl"}>{convertDateFormat(description.earnings_date[0])}</div>}
                     </div>
                     {description.past_earnings[0] &&
                         <div>

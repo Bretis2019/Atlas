@@ -30,7 +30,7 @@ function App() {
           {localStorage.getItem("token") === "" || page === "/Atlas/landing" ?  (<Landing/>) : (<div className={"md:overflow-hidden overflow-x-hidden bg-white dark:bg-black w-[100svw] h-[100svh] no-scrollbar"}>
               <Navbar onShow={handleShow}/>
               <div className={"flex"}>
-                  <Sidebar show={show}/>
+                  <Sidebar show={show} onPageChage={handleShow}/>
                   <Routes>
                       <Route path="/Atlas/" element={<Markets/>} />
                       <Route path="/Atlas/markets" element={<Markets/>} />

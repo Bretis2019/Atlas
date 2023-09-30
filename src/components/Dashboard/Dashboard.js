@@ -122,7 +122,7 @@ export default function Dashboard(){
 
     if(loading){
         return (
-            <div className={"flex items-center justify-center dark:bg-black dark:divide-white dark:text-white w-[100svw] md:w-[82svw] h-[93svh] border-x-2 md:border-r-0"}>
+            <div className={"flex items-center justify-center dark:bg-black dark:divide-white dark:text-white w-[100svw] md:w-[82svw] h-[93svh] border-2"}>
                 <div className="text-center">
                     <div role="status">
                         <svg aria-hidden="true"

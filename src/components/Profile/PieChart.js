@@ -36,6 +36,13 @@ export default function PieChart(props){
         }
     };
 
+    if(open.length < 1){
+        return (
+            <div className={"py-8 px-4"}>
+                <div className={"text-center text-4xl"}>No open positions</div>
+            </div>
+        )
+    }
 
     return (
         <div className={"py-8 px-4"}>
