@@ -144,7 +144,7 @@ export default function Dashboard(){
 
     return(
         <div className={"dark:bg-black dark:divide-white dark:text-white w-[100svw] md:w-[82svw] md:h-[93svh] grid grid-cols-1 md:grid-cols-3 grid-rows-8 divide-x-2 divide-y-2 divide-black border-r-2 md:border-r-0"}>
-            <div className={"border-t-2 dark:border-white border-black border-l-2 row-span-3"}>
+            <div className={"border-t-2 dark:border-white border-black border-x-2 md:border-r-0 md:border-l-2 row-span-3"}>
                 <div className={"flex flex-col"}>
                     <div className={"py-7 px-4 text-5xl border-b-2 dark:border-white border-black"}>Dashboard</div>
                     <div className={"p-2 border-b-2 border-black dark:border-white"}>
@@ -167,7 +167,7 @@ export default function Dashboard(){
                     </div>
                 </div>
             </div>
-            <div className={"row-span-3 col-span-2"}>
+            <div className={"row-span-3 col-span-2 border-x-2 md:border-r-0"}>
                 <div className={"flex flex-col justify-between  p-2"}>
                     <div className={"py-5 px-2 text-3xl md:text-4xl"}>Recent transactions</div>
                     <div className={"flex justify-between items-center"}>
@@ -179,8 +179,8 @@ export default function Dashboard(){
                 </div>
                 <Transactions />
             </div>
-            <div className={"row-span-5"}>
-                <div className={"flex justify-between flex-col p-2"}>
+            <div className={"row-span-5 border-x-2 md:border-r-0 md:"}>
+                <div className={"flex justify-between flex-col p-2 "}>
                     <div className={"py-5 px-2 text-3xl md:text-4xl"}>Open positions</div>
                     <div className={"flex justify-between items-center"}>
                         <h1>Ticker</h1>
@@ -191,7 +191,7 @@ export default function Dashboard(){
                 </div>
                 <OpenPositions array={openEnhanced}/>
             </div>
-            <div className={"row-span-5 col-span-2 pb-8 md:pb-0"}>
+            <div className={"row-span-5 col-span-2 pb-8 md:pb-0 border-x-2 md:border-r-0 md:"}>
                 <div className={"flex justify-between"}>
                         <div className={"py-7 px-4 text-3xl md:text-4xl"}>Performance</div>
                 </div>

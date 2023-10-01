@@ -105,9 +105,9 @@ export default function Order(){
 
     return (
         <div className={"dark:bg-black dark:divide-white dark:text-white w-[100svw] md:w-[82svw] md:h-[93svh] grid grid-cols-1 md:grid-cols-2 grid-rows-4 divide-x-2 divide-y-2 divide-black border-r-2 md:border-r-0"}>
-            <div className={"border-t-2 dark:border-white border-black border-l-2 row-span-1"}>
+            <div className={"border-t-2 dark:border-white border-black border-l-2 row-span-1 border-x-2 md:border-r-0 md:"}>
                 <div className={"flex flex-col"}>
-                    <div className={"py-7 px-4 text-5xl border-b-2 border-r-2 dark:border-white border-black"}>Order</div>
+                    <div className={"py-7 px-4 text-5xl border-b-2 dark:border-white border-black"}>Order</div>
                 </div>
                 <div className={"p-2"}>
                     <div className={"flex justify-between items-center space-x-2"}>
@@ -116,7 +116,7 @@ export default function Order(){
                     </div>
                 </div>
             </div>
-            <div className={"row-span-4 p-2 flex flex-col justify-center items-center"}>
+            <div className={"row-span-4 p-2 flex flex-col justify-center items-center border-x-2 md:border-r-0 md:"}>
                 <div className="flex space-x-4">
                     <div className="custom-number-input h-10 w-32">
                         <div className="flex flex-row h-10 w-full rounded-lg relative bg-transparent mt-1">
@@ -140,7 +140,7 @@ export default function Order(){
                 </div>
                 {success.length > 1? <h1 className={"text-5xl text-center"}>{success}</h1> : <div></div>}
             </div>
-            <div className={"row-span-5 pb-8 md:pb-0"}>
+            <div className={"row-span-5 pb-8 md:pb-0 border-x-2 md:border-r-0"}>
                 <div className={"flex justify-between flex-col p-2"}>
                     <div className={"py-5 px-2 text-3xl md:text-4xl"}>Open positions</div>
                     <div className={"flex justify-between items-center"}>

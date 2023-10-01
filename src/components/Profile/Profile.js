@@ -63,13 +63,13 @@ export default function Profile(){
 
     return (
         <div className={"dark:bg-black dark:divide-white dark:text-white w-[100svw] md:w-[82svw] md:h-[93svh] grid grid-cols-1 md:grid-cols-2 grid-rows-5 divide-x-2 divide-y-2 divide-black border-r-2 md:border-r-0"}>
-            <div className={"border-t-2 border-l-2 dark:border-white border-black row-span-1"}>
+            <div className={"border-t-2 border-x-2 md:border-r-0 md:border-l-2 dark:border-white border-black row-span-1"}>
                 <div className={"flex justify-between py-7 px-4"}>
                     <div className={"text-5xl"}>Profile</div>
                     <div className={'text-3xl'}>{username}</div>
                 </div>
             </div>
-            <div className={"border-t-2 dark:border-white border-black border-l-2 row-span-5 flex flex-col"}>
+            <div className={"border-t-2 dark:border-white border-black border-x-2 md:border-r-0 md:border-l-2 row-span-5 flex flex-col"}>
                 <div className={"flex justify-between flex-col p-2"}>
                     <div className={"py-5 px-2 text-3xl md:text-4xl"}>Portfolio</div>
                 </div>
@@ -77,7 +77,7 @@ export default function Profile(){
                     {open.length > 0 && <PieChart open={open}/>}
                 </div>
             </div>
-            <div className={"row-span-4 md:row-span-4 p-2 flex flex-col"}>
+            <div className={"row-span-4 md:row-span-4 p-2 flex flex-col border-x-2 md:border-r-0 "}>
                 <div className={"flex justify-between flex-col p-2"}>
                     <div className={"py-5 px-2 text-3xl md:text-4xl"}>Favorites</div>
                 </div>

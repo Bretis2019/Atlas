@@ -163,7 +163,7 @@ export default function Stock(){
 
     return(
         <div className={"dark:bg-black dark:divide-white dark:text-white w-[100svw] md:w-[82svw] md:h-[93svh] grid grid-cols-1 md:grid-cols-2 grid-rows-6 divide-x-2 divide-y-2 divide-black border-r-2 md:border-r-0"}>
-            <div className="flex flex-col border-t-2 dark:border-white border-black border-l-2 row-span-3">
+            <div className="flex flex-col border-t-2 dark:border-white border-black border-x-2 md:border-r-0 md:border-l-2 row-span-3">
                 <div className={"flex justify-between max-h-[35px] cursor-pointer pb-12"}>
                     <Link to={`/Atlas/order/${ticker}`}>
                         <div className={"cursor-pointer bg-purple-200 text-black text-2xl border-r-2 border-b-2 dark:border-white border-black px-1 py-1 flex items-center"}>
@@ -187,7 +187,7 @@ export default function Stock(){
                                 <div className={`px-2 ${getFirstWord(description.name).length > 9 ? "text-2xl" : "text-3xl"} md:text-4xl`}>{getFirstWord(description.name)}</div>
                             </div>
                             <div className={"flex max-md:flex-col space-x-4 max-md:space-y-4 items-center"}>
-                                <div className={"text-2xl bg-black rounded-full px-2"}>${description.price.toFixed(2)}</div>
+                                <div className={"text-2xl"}>${description.price.toFixed(2)}</div>
                                 <div className={`text-2xl text-${description.change < 0 ? "red-700" : "green-700"}`}>{roundToFirstNonZeroDecimal(description.change * 100)}%</div>
                             </div>
                         </div>
@@ -201,7 +201,7 @@ export default function Stock(){
                     </div>
                 </div>
             </div>
-            <div className={"border-t-2 dark:border-white border-black border-l-2 row-span-4"}>
+            <div className={"border-t-2 dark:border-white border-black border-x-2 md:border-r-0 md:border-l-2 row-span-4"}>
                 <div className={"flex flex-col px-4 py-2"}>
                     <CandleStock ticker={ticker} span={span}/>
                     <div className="flex pt-8 space-x-2 md:space-x-4 md:justify-center items-center overflow-x-scroll no-scrollbar">
@@ -214,7 +214,7 @@ export default function Stock(){
                     </div>
                 </div>
             </div>
-            <div className={"border-t-2 dark:border-white border-black border-l-2 row-span-3"}>
+            <div className={"border-t-2 dark:border-white border-black border-x-2 md:border-r-0 md:border-l-2 row-span-3"}>
                 <div className={"px-4 py-2"}>
                     <div className="flex justify-between items-center">
                         <div className="text-4xl">Earnings</div>
@@ -226,7 +226,7 @@ export default function Stock(){
                     </div>}
                 </div>
             </div>
-            <div className={"border-t-2 dark:border-white border-black border-l-2 row-span-2"}>
+            <div className={"border-t-2 dark:border-white border-black border-x-2 md:border-r-0 md:border-l-2 row-span-2"}>
                 <div className={"px-4 py-2"}>
                     <div className={"px-4 py-2  text-4xl"}>Recommended</div>
                     <div className={"px-4 py-2 flex overflow-x-scroll max-h-[250px] space-x-4 max-md:no-scrollbar"}>
