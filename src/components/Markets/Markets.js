@@ -69,7 +69,7 @@ export default function Markets(){
                             <div className={"text-4xl"}>${Number(sp[1]).toFixed(2)}</div>
                         </div>
                     </Link>
-                    <Link to={"/Atlas/order/dji"}>
+                    <Link to={"/Atlas/order/dia"}>
                         <div className={"p-2 cursor-pointer"}>
                             <div className={"flex items-center space-x-2"}>
                                 <div className={"text-2xl"}>Dow Jones</div>

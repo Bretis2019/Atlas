@@ -41,11 +41,21 @@ function getDates() {
 const isDarkMode = () =>
     window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
 
+function getAveragePriceByTicker(objects, targetTicker) {
+    for (const obj of objects) {
+        if (obj.ticker === targetTicker) {
+            return obj.averagePrice;
+        }
+    }
+    return null;
+}
+
 export default function CandleStock(props){
 
     const {ticker, span} = props;
 
     const [series, setSeries] = useState([]);
+    const [open, setOpen] = useState([]);
 
     const dates = getDates();
 
@@ -101,6 +111,18 @@ export default function CandleStock(props){
             .catch(error => {
                 console.error('Error:', error);
             });
+        fetch('https://atlasapi-4oe2.onrender.com/user/open', {
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${localStorage.getItem('token')}`
+            }
+        })
+            .then(res => res.json())
+            .then(data => {
+                setOpen(data);
+            })
+            .catch(err => console.log(err));
     }, [interval,from,ticker,to]);
 
     const options = {
@@ -141,7 +163,22 @@ export default function CandleStock(props){
         tooltip: {
             theme: isDarkMode() ?  'dark' : 'light'
         },
-
+        annotations: {
+            yaxis: [
+                {
+                    y: getAveragePriceByTicker(open, ticker),
+                    strokeDashArray: [5, 3],
+                    borderColor: '#00E396',
+                    label: {
+                        borderColor: '#00E396',
+                        style: {
+                            color: '#fff',
+                            background: '#00E396'
+                        },
+                    }
+                }
+            ]
+        }
     };
 
 
