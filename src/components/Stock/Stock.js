@@ -123,14 +123,7 @@ export default function Stock(){
                 'Authorization': `Bearer ${localStorage.getItem('token')}`
             },
             body: raw
-        })
-            .then(res => res.json())
-            .then(data => {
-                if(data.token && data.token.trim() !== ""){
-                    localStorage.setItem('token', data.token);
-                }
-            })
-            .catch(err => console.log(err));
+        }).catch(err => console.log(err));
     }
 
     if(isLoading){
